@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar android:theme="?actionBarTheme" android:id="@id/toolbar" android:background="?colorPrimary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="?actionBarSize" app:navigationIcon="@drawable/ic_clear_black_24dp" app:title="Tambah Kategori" app:titleTextColor="@color/colorPrimary_light" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="@dimen/gap_wrapper" android:layout_marginLeft="12.0dip">
+        <TextView android:textSize="@dimen/text_regular" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:text="Account" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_cat_person_black_24dp" android:contentDescription="Person" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip">
+                <TextView android:textSize="16.0sp" android:textColor="@color/substring" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nama Dompet" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/account_name" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="Cash, Tabungan, Bank..." android:inputType="textPersonName" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginLeft="48.0dip" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_cat_input_black_24dp" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip">
+                <TextView android:textSize="16.0sp" android:textColor="@color/substring" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saldo Awal" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/account_initial" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="0" android:inputType="numberDecimal" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginLeft="48.0dip" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_cat_assignment_black_24dp" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip">
+                <TextView android:textSize="16.0sp" android:textColor="@color/substring" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Catatan" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/account_description" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="Catatan / Deskripsi" android:inputType="textPersonName" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginLeft="48.0dip" />
+    </LinearLayout>
+</LinearLayout>

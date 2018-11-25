@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/transaksi"
+        android:enabled="true"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/historitransaksi"
+        android:enabled="true"
+        android:icon="@drawable/ic_cat_class_black_24dp"
+        android:title="Histori Transaksi"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/laporankeuangan"
+        android:enabled="true"
+        android:icon="@drawable/ic_cat_donut_small_black_24dp"
+        android:title="Laporan Keuangan"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/profiluser"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Profil User"
+        app:showAsAction="ifRoom" />
+</menu>

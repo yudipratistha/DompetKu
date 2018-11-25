@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="?android:selectableItemBackground" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="-1.0dip" android:foreground="?android:selectableItemBackground" cardCornerRadius="0.5dip" cardElevation="0.5dip">
+        <LinearLayout android:orientation="horizontal" android:background="@drawable/cardview_bg" android:paddingLeft="@dimen/default_gap_form" android:paddingRight="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.6">
+                <TextView android:textSize="@dimen/appbar_tab" android:textColor="@color/title" android:ellipsize="marquee" android:id="@id/text_category" android:paddingLeft="@dimen/default_gap" android:paddingTop="@dimen/default_gap_small" android:paddingRight="@dimen/default_gap_small" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="33asd2123233123123232323123232d" android:maxLines="1" />
+                <TextView android:textSize="@dimen/smaller_text" android:ellipsize="end" android:id="@id/text_notes" android:paddingLeft="35.0dip" android:paddingRight="0.0dip" android:paddingBottom="@dimen/default_gap_small" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="-sddsdsdsds d2323 23212123cccvxvcxvcx vcx dasdasd" android:maxLines="2" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.4">
+                <TextView android:textSize="@dimen/appbar_tab" android:textColor="@color/title" android:ellipsize="marquee" android:gravity="end" android:id="@id/text_value" android:padding="@dimen/default_gap_small" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Rp. 222.022.000" android:maxLines="1" android:maxLength="15" android:drawablePadding="20.0sp" />
+                <ImageView android:layout_gravity="end" android:id="@id/has_image" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_image_black_24dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

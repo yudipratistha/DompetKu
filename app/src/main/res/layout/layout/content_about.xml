@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@color/colorPrimary_light" android:padding="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/text_regular_form" android:textStyle="bold" android:gravity="start" android:layout_gravity="start" android:id="@id/title_about" android:padding="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Dompet Manager" />
+        <TextView android:textSize="@dimen/text_regular_form_label" android:id="@id/text_version" android:padding="@dimen/default_gap" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- Current Version : 1.0" />
+    </LinearLayout>
+    <Button android:layout_gravity="center" android:id="@id/button_rate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beri Bintang" android:drawableRight="@drawable/ic_cat_star_black_24dp" android:drawableEnd="@drawable/ic_cat_star_black_24dp" />
+    <LinearLayout android:orientation="vertical" android:id="@id/layout_pro" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/text_regular_form" android:textStyle="bold" android:gravity="start" android:layout_gravity="start" android:padding="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Upgrage ke Versi PRO" />
+        <TextView android:textSize="@dimen/text_regular_form_label" android:id="@id/text_vexrsion" android:padding="@dimen/default_gap" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- No Advertising" />
+        <TextView android:textSize="@dimen/text_regular_form_label" android:id="@id/text_vexrsion2" android:padding="@dimen/default_gap" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- Unlimited photo nota / transaksi" />
+        <TextView android:textSize="@dimen/text_regular_form_label" android:id="@id/text_vexrsion3" android:padding="@dimen/default_gap" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- Export Data CSV/Excel" />
+        <Button android:layout_gravity="center" android:id="@id/button_pro" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Versi PRO" android:drawableRight="@drawable/ic_chevron_right_black_24dp" android:drawableEnd="@drawable/ic_chevron_right_black_24dp" />
+    </LinearLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="@dimen/text_regular_form_label" android:gravity="center" android:id="@id/textView4" android:padding="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Develop by Chipbear 2017" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</LinearLayout>

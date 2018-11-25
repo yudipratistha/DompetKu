@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Switch android:textSize="@dimen/text_regular_form" android:id="@id/switch_enable_pin" android:background="@drawable/item_value_background" android:padding="@dimen/default_gap_form" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Aktifkan Pin/Password ?" />
+    <LinearLayout android:orientation="vertical" android:id="@id/layout_enabled" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="20.0dip" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="@dimen/gap_wrapper" android:layout_marginLeft="12.0dip">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_screen_lock_portrait_black_24dp" android:contentDescription="Person" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="22.0dip">
+                <TextView android:textSize="16.0sp" android:textColor="@color/colorBlack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Masukan Pin/Password (4 digit)" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/password" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="Pin/Password" android:maxLength="4" android:inputType="numberPassword" />
+                <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/confirmPassword" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="Confirm Pin/Password" android:maxLength="4" android:inputType="numberPassword" />
+                <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <EditText android:textSize="@dimen/text_regular" android:textColor="@color/title" android:id="@id/hint" android:background="#00000000" android:paddingTop="@dimen/default_gap" android:paddingBottom="@dimen/default_gap" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="Password Hint" android:inputType="text" />
+                <View android:background="#ffa6a6a6" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <Button android:id="@id/btn_confirm" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Set Password" />
+    </LinearLayout>
+</LinearLayout>

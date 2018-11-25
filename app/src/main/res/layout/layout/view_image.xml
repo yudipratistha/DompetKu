@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:layout_gravity="start" android:id="@id/image_view" android:layout_width="128.0dip" android:layout_height="144.0dip" android:layout_margin="@dimen/default_gap" android:scaleType="center" />
+    <ImageButton android:id="@id/delete_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@id/image_view" android:layout_alignRight="@id/image_view" app:srcCompat="@drawable/mr_dialog_close_dark" />
+</RelativeLayout>
