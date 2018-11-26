@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Switch
+        android:textSize="@dimen/text_regular_form"
+        android:id="@+id/switch_daily_notification"
+        android:background="@drawable/item_value_background"
+        android:padding="@dimen/default_gap_form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Aktifkan Pengingat Harian ?" />
+    <Button
+        android:textSize="@dimen/text_regular_form"
+        android:layout_gravity="center"
+        android:id="@+id/btn_time"
+        android:background="@drawable/item_value_background"
+        android:padding="@dimen/default_gap_form"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:hint="Pilih Jam"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_alarm_on_black_24dp"
+        android:drawableRight="@drawable/black_dropdown"
+        android:drawablePadding="@dimen/default_gap"
+        android:layout_weight="1.0"
+        android:drawableStart="@drawable/ic_alarm_on_black_24dp"
+        android:drawableEnd="@drawable/black_dropdown" />
+</LinearLayout>

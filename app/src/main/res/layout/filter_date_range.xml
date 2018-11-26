@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/item_white_round"
+        android:padding="@dimen/default_gap"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:textSize="@dimen/text_small"
+                android:layout_gravity="center"
+                android:id="@+id/btn_date_start"
+                android:background="@drawable/item_value_background"
+                android:padding="@dimen/default_gap_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:ems="10"
+                android:drawableLeft="@drawable/ic_cat_date_range_black_24dp"
+                android:drawableRight="@drawable/black_dropdown"
+                android:drawablePadding="@dimen/default_gap"
+                android:layout_weight="1.0"
+                android:drawableStart="@drawable/ic_cat_date_range_black_24dp"
+                android:drawableEnd="@drawable/black_dropdown" />
+            <TextView
+                android:textSize="@dimen/text_regular_form"
+                android:layout_gravity="center"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-" />
+            <Button
+                android:textSize="@dimen/text_small"
+                android:layout_gravity="center"
+                android:id="@+id/btn_date_end"
+                android:background="@drawable/item_value_background"
+                android:padding="@dimen/default_gap_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:ems="10"
+                android:drawableLeft="@drawable/ic_cat_date_range_black_24dp"
+                android:drawableRight="@drawable/black_dropdown"
+                android:drawablePadding="@dimen/default_gap"
+                android:layout_weight="1.0"
+                android:drawableStart="@drawable/ic_cat_date_range_black_24dp"
+                android:drawableEnd="@drawable/black_dropdown" />
+            <!--<TextView-->
+                <!--android:textSize="@dimen/text_regular_form"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:id="@+id/textViewX"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="|" />-->
+            <!--<ImageButton-->
+                <!--android:id="@id/export_csv"-->
+                <!--android:background="@drawable/item_value_background"-->
+                <!--android:padding="@dimen/default_gap_small" -->
+                <!--android:layout_width="wrap_content" -->
+                <!--android:layout_height="fill_parent" -->
+                <!--android:src="@drawable/download_csv" />-->
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
