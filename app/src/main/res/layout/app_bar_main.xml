@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout android:id="@+id/appbar" android:layout_width="match_parent" android:layout_height="wrap_content" app:elevation="0dp">
-            <android.support.v7.widget.Toolbar android:id="@+id/toolbar" android:background="?attr/colorPrimary" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" app:layout_scrollFlags="5" app:titleTextAppearance="@style/Toolbar_TitleText" app:titleTextColor="@color/colorBackroundWhite">
-                <RelativeLayout android:gravity="left" android:id="@+id/layout_month_selection" android:layout_width="wrap_content" android:layout_height="wrap_content">
-                    <ImageButton android:id="@+id/imageButton_prev" android:background="?attr/selectableItemBackgroundBorderless" android:padding="@dimen/text_small" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_chevron_left_black_24dp" android:tint="@color/mdtp_white" android:contentDescription="Before"/>
-                    <TextView android:textSize="@dimen/nav_text" android:textStyle="bold" android:textColor="@color/primaryTextColor" android:gravity="center_vertical" android:id="@+id/text_month" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Juni 2014" android:layout_toRightOf="@+id/imageButton_prev" android:layout_centerVertical="true"/>
-                    <ImageButton android:layout_gravity="center_vertical" android:id="@+id/imageButton_next" android:background="?attr/selectableItemBackgroundBorderless" android:padding="@dimen/text_small" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_chevron_right_black_24dp" android:tint="@color/mdtp_white" android:layout_toRightOf="@+id/text_month"/>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:background="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextAppearance="@style/Toolbar_TitleText"
+                app:titleTextColor="@color/colorBackroundWhite">
+                <RelativeLayout
+                    android:gravity="left"
+                    android:id="@+id/layout_month_selection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/imageButton_prev"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="@dimen/text_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:src="@drawable/ic_chevron_left_black_24dp" android:tint="@color/mdtp_white" android:contentDescription="Before"/>
+                    <TextView
+                        android:textSize="@dimen/nav_text"
+                        android:textStyle="bold"
+                        android:textColor="@color/primaryTextColor"
+                        android:gravity="center_vertical"
+                        android:id="@+id/text_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nopember 2018"
+                        android:layout_toRightOf="@+id/imageButton_prev"
+                        android:layout_centerVertical="true"/>
+                    <ImageButton
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/imageButton_next"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="@dimen/text_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chevron_right_black_24dp"
+                        android:tint="@color/mdtp_white"
+                        android:layout_toRightOf="@+id/text_month"/>
                 </RelativeLayout>
-                <ImageButton android:layout_gravity="end" android:id="@+id/toolbar_wallet" android:background="?attr/selectableItemBackgroundBorderless" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/appbar_tab" android:src="@drawable/ic_cat_account_balance_wallet_black_24dp" android:tint="@color/mdtp_white"/>
-                <ImageButton android:layout_gravity="end" android:id="@+id/toolbar_filter" android:background="?attr/selectableItemBackgroundBorderless" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_filter_list_black_24dp" android:tint="@color/mdtp_white"/>
+                <ImageButton
+                    android:layout_gravity="end"
+                    android:id="@+id/toolbar_wallet"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/appbar_tab"
+                    android:src="@drawable/ic_cat_account_balance_wallet_black_24dp"
+                    android:tint="@color/mdtp_white"/>
+                <ImageButton
+                    android:layout_gravity="end"
+                    android:id="@+id/toolbar_filter"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_filter_list_black_24dp"
+                    android:tint="@color/mdtp_white"/>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-        <FrameLayout android:id="@+id/main_placeholder" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1.01"/>
-        <include android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/element_ads"/>
+        <FrameLayout
+            android:id="@+id/main_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.01"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

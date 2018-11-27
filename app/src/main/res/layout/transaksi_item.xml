@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:paddingLeft="4"
+        android:paddingLeft="4dp"
         android:id="@+id/header">
 
         <TextView
@@ -54,7 +54,7 @@
             android:textColor="@color/title"
             android:gravity="end"
             android:layout_gravity="end"
-            android:id="@id/text_value"
+            android:id="@+id/text_value"
             android:padding="@dimen/default_gap_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,16 +4,13 @@ package com.example.yudipratistha.dompetku.model;
 import com.google.gson.annotations.SerializedName;
 
 //@Generated("com.robohorse.robopojogenerator")
-public class UserLogin{
+public class UserLogin_old {
 
 	@SerializedName("success")
 	private Success success;
 
 	@SerializedName("status")
 	private boolean status;
-
-	@SerializedName("dataPengguna")
-	private DataPengguna dataPengguna;
 
 	public void setSuccess(Success success){
 		this.success = success;
@@ -31,21 +28,12 @@ public class UserLogin{
 		return status;
 	}
 
-	public void setDataPengguna(DataPengguna dataPengguna){
-		this.dataPengguna = dataPengguna;
-	}
-
-	public DataPengguna getDataPengguna(){
-		return dataPengguna;
-	}
-
 	@Override
  	public String toString(){
 		return 
-			"UserLogin{" + 
+			"UserLogin_old{" +
 			"success = '" + success + '\'' + 
 			",status = '" + status + '\'' + 
-			",dataPengguna = '" + dataPengguna + '\'' + 
 			"}";
 		}
 }

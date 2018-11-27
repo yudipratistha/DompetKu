@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        nama_pengguna = findViewById(R.id.nama_pengguna);
 //        email_pengguna =  findViewById(R.id.email_pengguna);
-
+//
 //        SharedPreferences sharedPref = getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
 //        Boolean status_login = sharedPref.getBoolean("status_login",false);
 //        String nama_user = sharedPref.getString("nama_user","");
@@ -42,40 +42,40 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(this, LoginActivity.class);
 //        startActivity(intent);
 
-//        bottomNavigation = findViewById(R.id.bottom_navigation);
-//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                switch (menuItem.getItemId()){
-//                    case R.id.transaksi:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.main_container, TransactionFragment.newInstance(), TransactionFragment.class.getSimpleName())
-//                                .commit();
-//
-//                        break;
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.transaksi:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, TransactionFragment.newInstance(), TransactionFragment.class.getSimpleName())
+                                .commit();
+
+                        break;
 //                    case R.id.historitransaksi:
 //                        getSupportFragmentManager()
 //                                .beginTransaction()
 //                                .replace(R.id.main_container, HistoriTransaksiFragment.newInstance(), HistoriTransaksiFragment.class.getSimpleName())
 //                                .commit();
 //                        break;
-//                    case R.id.profiluser:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.main_container, ProfileFragment.newInstance(), ProfileFragment.class.getSimpleName())
-//                                .commit();
-//                        break;
-//                }
-//                return true;
-//            }
-//
-//        });
+                    case R.id.profiluser:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, ProfileFragment.newInstance(), ProfileFragment.class.getSimpleName())
+                                .commit();
+                        break;
+                }
+                return true;
+            }
+
+        });
     }
-//
-//    @Override
-//    protected void onResumeFragments() {
-//        super.onResumeFragments();
-//
-//    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+
+    }
 }

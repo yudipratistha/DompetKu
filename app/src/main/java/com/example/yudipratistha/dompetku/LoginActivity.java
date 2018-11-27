@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
-import com.example.yudipratistha.dompetku.model.UserLogin;
+import com.example.yudipratistha.dompetku.model.UserLogin_old;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,9 +58,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_login:
                 service.loginPost(etEmail.getText().toString(), etPassword.getText().toString())
-                        .enqueue(new Callback<UserLogin>() {
+                        .enqueue(new Callback<UserLogin_old>() {
                             @Override
-                            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                            public void onResponse(Call<UserLogin_old> call, Response<UserLogin_old> response) {
                                 if (response.isSuccessful()) {
                                     Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
                                     SharedPreferences sharedPref = getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
 
                             @Override
-                            public void onFailure(Call<UserLogin> call, Throwable t) {
+                            public void onFailure(Call<UserLogin_old> call, Throwable t) {
                                 Toast.makeText(LoginActivity.this, "Gagal" + t, Toast.LENGTH_LONG).show();
                             }
                         });

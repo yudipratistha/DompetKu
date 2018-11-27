@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_below="@+id/viewpager"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
@@ -28,14 +27,13 @@
                 android:background="?colorPrimary"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@+id/balanced_bar"
+                android:layout_below="@+id/toolbar"
                 android:layout_alignParentLeft="true"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/primaryTextColor"
                 app:tabIndicatorHeight="3.0dip"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/primaryTextColor"
-                app:tabTextAppearance="@style/Toolbar.TitleText"
                 app:tabTextColor="@color/mdtp_line_background">
                 <android.support.design.widget.TabItem
                     android:id="@+id/tab_expense"
@@ -56,7 +54,7 @@
                 <TextView
                     android:textSize="@dimen/text_value_input_lable"
                     android:gravity="center"
-                    android:id="@+id/text_operation"
+                    android:id="@+id/input_text"
                     android:background="@drawable/item_value_background"
                     android:paddingLeft="20.0dip"
                     android:layout_width="wrap_content"
@@ -73,6 +71,7 @@
                     android:layout_height="fill_parent"
                     android:minHeight="115.0dip"
                     android:hint="@string/_0"
+                    android:textAlignment="textEnd"
                     android:ems="10"
                     android:maxLength="17"
                     android:layout_weight="1.0"
