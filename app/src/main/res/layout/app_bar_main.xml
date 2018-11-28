@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextAppearance="@style/Toolbar_TitleText"
-                app:titleTextColor="@color/colorBackroundWhite">
+                app:titleTextColor="@color/colorAccentGreen">
                 <RelativeLayout
                     android:gravity="left"
                     android:id="@+id/layout_month_selection"

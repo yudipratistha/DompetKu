@@ -27,7 +27,7 @@ public class AddActivity extends AppCompatActivity {
     EditText title;
     ImageView icon_activity;
     Spinner type;
-    EditText distance;
+//    EditText distance;
     EditText hour;
     EditText minute;
     EditText date;
@@ -37,7 +37,7 @@ public class AddActivity extends AppCompatActivity {
     MenuItem save;
 //    Activity activity;
 
-    boolean isAdd = true;
+//    boolean isAdd = true;
 
 //    public void populateData(Activity activity){
 //        title.setText(activity.getTitle());
