@@ -16,7 +16,7 @@
             app:elevation="0dp">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:background="?attr/colorPrimary"
+                android:background="@color/colorAccentGreen"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextAppearance="@style/Toolbar_TitleText"

@@ -35,6 +35,7 @@ public class TransactionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        activityList = TriathlogDbHelper.getInstance(getActivity()).getAllActivity();
+
     }
 
     @Override
