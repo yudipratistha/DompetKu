@@ -54,12 +54,18 @@ public class MainActivity extends AppCompatActivity {
                                 .commit();
 
                         break;
-//                    case R.id.historitransaksi:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.main_container, HistoriTransaksiFragment.newInstance(), HistoriTransaksiFragment.class.getSimpleName())
-//                                .commit();
-//                        break;
+                    case R.id.historitransaksi:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, HistoriTransaksiFragment.newInstance(), HistoriTransaksiFragment.class.getSimpleName())
+                                .commit();
+                        break;
+                    case R.id.laporankeuangan:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, LaporanKeuanganFragment.newInstance(), LaporanKeuanganFragment.class.getSimpleName())
+                                .commit();
+                        break;
                     case R.id.profiluser:
                         getSupportFragmentManager()
                                 .beginTransaction()

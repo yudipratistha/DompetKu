@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
@@ -16,10 +17,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected EditText etName, etEmail, etPassword, etC_Password;
-    protected Button btn_register;
+    protected Button btn_signup;
+    protected TextView btn_login;
 
     APIService service;
 
@@ -27,19 +29,22 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
         service = APIClient.getService();
 
         etName = findViewById(R.id.input_name);
         etEmail = findViewById(R.id.input_email);
         etPassword = findViewById(R.id.input_password);
         etC_Password = findViewById(R.id.c_password);
-        btn_register = findViewById(R.id.btn_signup);
+        btn_signup = findViewById(R.id.btn_signup);
+        btn_login = findViewById(R.id.link_login);
+        btn_login.setOnClickListener(this);
+        btn_signup.setOnClickListener(this);
+    }
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //user pengguna = new user(
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_signup:
                 String name = etName.getText().toString();
                 String email = etEmail.getText().toString();
                 String password= etPassword.getText().toString();
@@ -51,9 +56,7 @@ public class SignupActivity extends AppCompatActivity {
                             public void onResponse(Call<Signup> call, Response<Signup> response) {
                                 if (response.isSuccessful()){
                                     Toast.makeText(SignupActivity.this,"Sukses",Toast.LENGTH_LONG).show();
-                                    Intent tampilanLogin = new Intent(getApplicationContext(),LoginActivity.class);
-                                    startActivity(tampilanLogin);
-
+                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                 }
                                 else {
                                     Toast.makeText(SignupActivity.this,"Gagal nyet",Toast.LENGTH_LONG).show();
@@ -65,11 +68,11 @@ public class SignupActivity extends AppCompatActivity {
                                 Toast.makeText(SignupActivity.this,"Gagal"+t,Toast.LENGTH_LONG).show();
                             }
                         });
-
-
-            }
-        });
-
-
+                break;
+            case R.id.link_login:
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                finish();
+                break;
+        }
     }
 }

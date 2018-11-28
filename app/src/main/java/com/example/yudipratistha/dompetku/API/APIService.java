@@ -2,7 +2,7 @@ package com.example.yudipratistha.dompetku.API;
 
 
 import com.example.yudipratistha.dompetku.model.Signup;
-import com.example.yudipratistha.dompetku.model.UserLogin_old;
+import com.example.yudipratistha.dompetku.model.UserLogin;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,7 +19,7 @@ public interface APIService {
     );
     @FormUrlEncoded
     @POST("login")
-    Call<UserLogin_old> loginPost(@Field("email") String email,
+    Call<UserLogin> loginPost(@Field("email") String email,
                                   @Field("password") String password
     );
 }

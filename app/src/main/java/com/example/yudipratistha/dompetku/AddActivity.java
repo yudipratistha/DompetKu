@@ -68,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
 //        desc = findViewById(R.id.desc_input);
 
         //isntance Calendar
-        myCalendar = Calendar.getInstance();
+//        myCalendar = Calendar.getInstance();
 
 //        //spinner
 //        ArrayAdapter<Type> adapter = new ArrayAdapter<Type>(this, android.R.layout.simple_spinner_item, types);
@@ -116,54 +116,54 @@ public class AddActivity extends AppCompatActivity {
 //        });
 
         //display datepicker
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                myCalendar.set(Calendar.YEAR, year);
-                                myCalendar.set(Calendar.MONTH, monthOfYear);
-                                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                                date.setText(Util.calendarToStringFriendly(myCalendar, "yyyy-MM-dd"));
-                            }
-                        },
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)
-                );
-                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                datePickerDialog.show();
-            }
-        });
-
-        //display timepicker
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int hour = myCalendar.get(Calendar.HOUR_OF_DAY);
-                int minute = myCalendar.get(Calendar.MINUTE);
-
-                new TimePickerDialog(
-                        AddActivity.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour);
-                                myCalendar.set(Calendar.MINUTE, selectedMinute);
-//                                time.setText(Util.calendarToString(myCalendar, "HH:mm"));
-                            }
-                        },
-                        hour,
-                        minute,
-                        true
-                ).show();
-            }
-        });
-    }
+//        date.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                        AddActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                                myCalendar.set(Calendar.YEAR, year);
+//                                myCalendar.set(Calendar.MONTH, monthOfYear);
+//                                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+////                                date.setText(Util.calendarToStringFriendly(myCalendar, "yyyy-MM-dd"));
+//                            }
+//                        },
+//                        myCalendar.get(Calendar.YEAR),
+//                        myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)
+//                );
+//                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+//                datePickerDialog.show();
+//            }
+//        });
+//
+//        //display timepicker
+//        time.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                int hour = myCalendar.get(Calendar.HOUR_OF_DAY);
+//                int minute = myCalendar.get(Calendar.MINUTE);
+//
+//                new TimePickerDialog(
+//                        AddActivity.this,
+//                        new TimePickerDialog.OnTimeSetListener() {
+//                            @Override
+//                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+//                                myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour);
+//                                myCalendar.set(Calendar.MINUTE, selectedMinute);
+////                                time.setText(Util.calendarToString(myCalendar, "HH:mm"));
+//                            }
+//                        },
+//                        hour,
+//                        minute,
+//                        true
+//                ).show();
+//            }
+//        });
+//    }
 
 
 //    @Override
@@ -208,6 +208,6 @@ public class AddActivity extends AppCompatActivity {
 //            default:
 //                return super.onOptionsItemSelected(item);
 //        }
-//    }
+    }
 
 }

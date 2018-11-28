@@ -16,7 +16,7 @@ import com.example.yudipratistha.dompetku.model.UserLogin;
 import java.util.Calendar;
 
 
-public class HistoriTransaksiFragment extends Fragment {
+public class LaporanKeuanganFragment extends Fragment {
     public DataPengguna profile;
     private Calendar birthdayCalendar = Calendar.getInstance();
     private ImageView profile_pict;
@@ -28,17 +28,17 @@ public class HistoriTransaksiFragment extends Fragment {
     private EditText weight_input;
     private EditText height_input;
 
-    public HistoriTransaksiFragment() {}
+    public LaporanKeuanganFragment() {}
 
-    public static HistoriTransaksiFragment newInstance() {
-        HistoriTransaksiFragment fragment = new HistoriTransaksiFragment();
+    public static LaporanKeuanganFragment newInstance() {
+        LaporanKeuanganFragment fragment = new LaporanKeuanganFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_histori_transaksi, container, false);
+        return inflater.inflate(R.layout.fragment_report_transaksi, container, false);
     }
 
 //    @Override

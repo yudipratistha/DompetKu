@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
-import com.example.yudipratistha.dompetku.model.UserLogin_old;
+import com.example.yudipratistha.dompetku.model.UserLogin;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,9 +58,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_login:
                 service.loginPost(etEmail.getText().toString(), etPassword.getText().toString())
-                        .enqueue(new Callback<UserLogin_old>() {
+                        .enqueue(new Callback<UserLogin>() {
                             @Override
-                            public void onResponse(Call<UserLogin_old> call, Response<UserLogin_old> response) {
+                            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                                 if (response.isSuccessful()) {
                                     Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
                                     SharedPreferences sharedPref = getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
 
                             @Override
-                            public void onFailure(Call<UserLogin_old> call, Throwable t) {
+                            public void onFailure(Call<UserLogin> call, Throwable t) {
                                 Toast.makeText(LoginActivity.this, "Gagal" + t, Toast.LENGTH_LONG).show();
                             }
                         });
@@ -89,6 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 break;
             case R.id.link_signup:
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                finish();
                 break;
         }
 
