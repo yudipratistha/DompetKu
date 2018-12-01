@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -27,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         service = APIClient.getService();
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_container, TransactionFragment.newInstance(), TransactionFragment.class.getSimpleName())
+                .commit();
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.appbar);
+//        setSupportActionBar(myToolbar);
 //        nama_pengguna = findViewById(R.id.nama_pengguna);
 //        email_pengguna =  findViewById(R.id.email_pengguna);
 //
@@ -52,20 +58,22 @@ public class MainActivity extends AppCompatActivity {
                                 .beginTransaction()
                                 .replace(R.id.main_container, TransactionFragment.newInstance(), TransactionFragment.class.getSimpleName())
                                 .commit();
-
                         break;
+
                     case R.id.historitransaksi:
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, HistoriTransaksiFragment.newInstance(), HistoriTransaksiFragment.class.getSimpleName())
                                 .commit();
                         break;
+
                     case R.id.laporankeuangan:
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, LaporanKeuanganFragment.newInstance(), LaporanKeuanganFragment.class.getSimpleName())
                                 .commit();
                         break;
+
                     case R.id.profiluser:
                         getSupportFragmentManager()
                                 .beginTransaction()

@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,8 +52,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setupToolBar();
         //load all data from sqlite
 //        final List<Type> types = TriathlogDbHelper.getInstance(this).getAllType();
 
@@ -208,6 +208,24 @@ public class AddActivity extends AppCompatActivity {
 //            default:
 //                return super.onOptionsItemSelected(item);
 //        }
+    }
+    private void setupToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar == null) return;
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // close this activity as oppose to navigating up
+
+        return false;
     }
 
 }

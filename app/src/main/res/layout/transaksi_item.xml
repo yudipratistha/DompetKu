@@ -79,8 +79,7 @@
             android:textSize="@dimen/smaller_text"
             android:textColor="@color/title"
             android:layout_gravity="start"
-            android:id="@+id/balance_date"
-
+            android:id="@+id/balance_kategori"
             android:padding="4.0dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,12 +94,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Beli Nasi Goreeng"
-            android:layout_below="@id/balance_date"
-            android:layout_alignLeft="@id/balance_date" />
+            android:layout_below="@id/balance_kategori"
+            android:layout_alignLeft="@id/balance_kategori" />
         <TextView
             android:textSize="@dimen/appbar_tab"
             android:textColor="@color/title"
-            android:ellipsize="marquee"
             android:gravity="end"
             android:id="@+id/balance_value"
             android:padding="@dimen/default_gap_small"
@@ -110,7 +108,7 @@
             android:maxLines="1"
             android:maxLength="15"
             android:drawablePadding="20.0sp"
-            android:layout_toRightOf="@id/balance_date"
+            android:layout_toRightOf="@id/balance_kategori"
             android:layout_alignParentRight="true" />
         <ImageView
             android:layout_gravity="end"

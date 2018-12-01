@@ -21,7 +21,18 @@
                 android:minHeight="?actionBarSize"
                 app:navigationIcon="@drawable/ic_clear_black_24dp"
                 app:title="Edit / Tambah Transaksi"
-                app:titleTextColor="@color/colorPrimary_light" />
+                app:titleTextColor="@color/colorPrimary_light" >
+            <ImageButton
+                android:layout_gravity="end"
+                android:id="@+id/toolbar_wallet"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/appbar_tab"
+                android:src="@drawable/ic_done_black_24dp"
+                android:tint="@color/mdtp_white"/>
+            </android.support.v7.widget.Toolbar>
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:background="@color/colorAccentGreen"
@@ -128,6 +139,7 @@
                 android:layout_weight="1.0" />
             <Button
                 android:textSize="@dimen/text_regular"
+                android:textAlignment="textStart"
                 android:layout_gravity="start"
                 android:id="@+id/input_category"
                 android:background="@drawable/item_white_border_bottom"
@@ -141,6 +153,7 @@
                 android:drawableStart="@drawable/ic_folder_special_black_24dp" />
             <Button
                 android:textSize="@dimen/text_regular"
+                android:textAlignment="textStart"
                 android:layout_gravity="start"
                 android:id="@+id/input_date"
                 android:background="@drawable/item_white_border_bottom"
@@ -154,6 +167,7 @@
                 android:drawableStart="@drawable/ic_cat_date_range_black_24dp" />
             <Button
                 android:textSize="@dimen/text_regular"
+                android:textAlignment="textStart"
                 android:layout_gravity="start"
                 android:id="@+id/input_account"
                 android:background="@drawable/item_white_border_bottom"
