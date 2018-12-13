@@ -1,14 +1,21 @@
 package com.example.yudipratistha.dompetku;
 
+import android.app.ActionBar;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.yudipratistha.dompetku.model.DataPengguna;
 import com.example.yudipratistha.dompetku.model.UserLogin;
@@ -27,6 +34,7 @@ public class ProfileFragment extends Fragment {
     private EditText birthday_input;
     private EditText weight_input;
     private EditText height_input;
+    private Button logout_button;
 
     public ProfileFragment() {}
 
@@ -44,7 +52,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Profile");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setCustomView(R.layout.app_bar_text);
+        TextView text_judul = getActivity().findViewById(R.id.text_judul);
+        text_judul.setText(R.string.profil);
 
 //        profile = TriathlogDbHelper.getInstance(getActivity()).getProfile(1);
         profile = new DataPengguna();
@@ -74,6 +86,20 @@ public class ProfileFragment extends Fragment {
 //        height_input.setOnFocusChangeListener(new FocusChangeListener());
 
         populateData(profile);
+
+        logout_button = getActivity().findViewById(R.id.btn_logout);
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences = getActivity().getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent loginactivity = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+                startActivity(loginactivity);
+                getActivity().finish();
+            }
+        });
     }
 
     private void populateData(DataPengguna profile){

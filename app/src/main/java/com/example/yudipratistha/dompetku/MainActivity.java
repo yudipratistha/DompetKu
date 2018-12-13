@@ -49,11 +49,20 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setElevation(50);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.transaksi:
+                        Intent intent = getIntent();
+                        String month = intent.getStringExtra("month");
+                        Bundle bundle=new Bundle();
+                        bundle.putString("month", month);
+                        //set Fragmentclass Arguments
+                        TransactionFragment fragobj=new TransactionFragment();
+                        fragobj.setArguments(bundle);
+
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, TransactionFragment.newInstance(), TransactionFragment.class.getSimpleName())

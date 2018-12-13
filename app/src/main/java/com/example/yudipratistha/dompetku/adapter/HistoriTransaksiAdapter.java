@@ -2,7 +2,6 @@ package com.example.yudipratistha.dompetku.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -25,13 +24,11 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.ViewHolder> {
+public class HistoriTransaksiAdapter extends RecyclerView.Adapter<HistoriTransaksiAdapter.ViewHolder> {
     Context context;
     List<LihatTransaksiItem> activities;
-    private final int REQUEST_UPDATE = 1;
 
-
-    public TransaksiAdapter(Context context, List<LihatTransaksiItem> activities) {
+    public HistoriTransaksiAdapter(Context context, List<LihatTransaksiItem> activities) {
         this.context = context;
         this.activities = activities;
     }
@@ -42,7 +39,7 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
 
     @NonNull
     @Override
-    public TransaksiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HistoriTransaksiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.transaksi_item, viewGroup, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
@@ -50,10 +47,10 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull TransaksiAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull HistoriTransaksiAdapter.ViewHolder viewHolder, int i) {
         LihatTransaksiItem activity = activities.get(i);
         LihatKategoriItem type = DompetkuSqLite.getInstance(context).getType(activity.getIdKategori());
-        int total = DompetkuSqLite.getInstance(context).getTransaksiMonthTotal(activity.getTanggal());
+        int total = DompetkuSqLite.getInstance(context).getHistTransaksiFilter(activity.getTanggal(),activity.getTanggal(), type.getTipe());
 
         String[] datetime = activity.getTanggal().split(" ");
         String prevDate = (i == 0) ? "" : activities.get(i - 1).getTanggal().split(" ")[0];
@@ -64,9 +61,9 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
             viewHolder.text_number_day.setText(String.valueOf(Util.calendarToString(myCalendar, "dd" )));
             viewHolder.text_day.setText(String.valueOf(Util.calendarToString(myCalendar, "EEEE" )));
             viewHolder.text_month.setText(String.valueOf(Util.calendarToString(myCalendar, "MMMM yyyy" )));
-            if(total < 0){
+            if(type.getTipe().equals("Pengeluaran")){
                 viewHolder.text_value.setTextColor(context.getColor(R.color.colorAccentRed));
-                String total_trans_hari = "Rp. " + String.valueOf(total);
+                String total_trans_hari = "Rp. -" + String.valueOf(total);
                 viewHolder.text_value.setText(total_trans_hari);
 
             }else if(total > 0){
@@ -109,7 +106,7 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
 
     @Override
     public int getItemCount() {
-        return activities.size();
+        return activities == null ? 0 : activities.size();
     }
 
 
@@ -149,10 +146,11 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
         public void onClick(View view) {
             int position = getAdapterPosition();
             LihatTransaksiItem activity = activities.get(position);
+
             Intent detail_activity = new Intent(view.getContext(), AddActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("Transaksi", activity);
-            detail_activity.putExtras(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("Activity", activity);
+//            detail_activity.putExtras(bundle);
             view.getContext().startActivity(detail_activity);
         }
     }

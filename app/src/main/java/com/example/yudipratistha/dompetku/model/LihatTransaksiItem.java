@@ -3,20 +3,28 @@ package com.example.yudipratistha.dompetku.model;
 //import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 //@Generated("com.robohorse.robopojogenerator")
-public class LihatTransaksiItem{
+public class LihatTransaksiItem implements Serializable {
+
+	@SerializedName("status_update")
+	private int statusUpdate;
+
+	@SerializedName("status_sync")
+	private int statusSync;
 
 	@SerializedName("id_kategori")
 	private int idKategori;
-
-	@SerializedName("id_penyimpanan")
-	private int idPenyimpanan;
 
 	@SerializedName("jumlah")
 	private int jumlah;
 
 	@SerializedName("updated_at")
 	private String updatedAt;
+
+	@SerializedName("status_delete")
+	private int statusDelete;
 
 	@SerializedName("catatan")
 	private String catatan;
@@ -33,20 +41,28 @@ public class LihatTransaksiItem{
 	@SerializedName("tanggal")
 	private String tanggal;
 
+	public void setStatusUpdate(int statusUpdate){
+		this.statusUpdate = statusUpdate;
+	}
+
+	public int getStatusUpdate(){
+		return statusUpdate;
+	}
+
+	public void setStatusSync(int statusSync){
+		this.statusSync = statusSync;
+	}
+
+	public int getStatusSync(){
+		return statusSync;
+	}
+
 	public void setIdKategori(int idKategori){
 		this.idKategori = idKategori;
 	}
 
 	public int getIdKategori(){
 		return idKategori;
-	}
-
-	public void setIdPenyimpanan(int idPenyimpanan){
-		this.idPenyimpanan = idPenyimpanan;
-	}
-
-	public int getIdPenyimpanan(){
-		return idPenyimpanan;
 	}
 
 	public void setJumlah(int jumlah){
@@ -63,6 +79,14 @@ public class LihatTransaksiItem{
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public void setStatusDelete(int statusDelete){
+		this.statusDelete = statusDelete;
+	}
+
+	public int getStatusDelete(){
+		return statusDelete;
 	}
 
 	public void setCatatan(String catatan){
@@ -109,10 +133,11 @@ public class LihatTransaksiItem{
  	public String toString(){
 		return 
 			"LihatTransaksiItem{" + 
-			"id_kategori = '" + idKategori + '\'' + 
-			",id_penyimpanan = '" + idPenyimpanan + '\'' + 
+			"status_update = '" + statusUpdate + '\'' + 
+			",id_kategori = '" + idKategori + '\'' + 
 			",jumlah = '" + jumlah + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
+			",status_delete = '" + statusDelete + '\'' + 
 			",catatan = '" + catatan + '\'' + 
 			",created_at = '" + createdAt + '\'' + 
 			",id = '" + id + '\'' + 

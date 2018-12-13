@@ -9,17 +9,20 @@ public class BuatTransaksi{
 	@SerializedName("buatTransaksi")
 	private BuatTransaksi buatTransaksi;
 
+	@SerializedName("status_update")
+	private String statusUpdate;
+
 	@SerializedName("id_kategori")
 	private String idKategori;
-
-	@SerializedName("id_penyimpanan")
-	private String idPenyimpanan;
 
 	@SerializedName("jumlah")
 	private String jumlah;
 
 	@SerializedName("updated_at")
 	private String updatedAt;
+
+	@SerializedName("status_delete")
+	private String statusDelete;
 
 	@SerializedName("catatan")
 	private String catatan;
@@ -44,20 +47,20 @@ public class BuatTransaksi{
 		return buatTransaksi;
 	}
 
+	public void setStatusUpdate(String statusUpdate){
+		this.statusUpdate = statusUpdate;
+	}
+
+	public String getStatusUpdate(){
+		return statusUpdate;
+	}
+
 	public void setIdKategori(String idKategori){
 		this.idKategori = idKategori;
 	}
 
 	public String getIdKategori(){
 		return idKategori;
-	}
-
-	public void setIdPenyimpanan(String idPenyimpanan){
-		this.idPenyimpanan = idPenyimpanan;
-	}
-
-	public String getIdPenyimpanan(){
-		return idPenyimpanan;
 	}
 
 	public void setJumlah(String jumlah){
@@ -74,6 +77,14 @@ public class BuatTransaksi{
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public void setStatusDelete(String statusDelete){
+		this.statusDelete = statusDelete;
+	}
+
+	public String getStatusDelete(){
+		return statusDelete;
 	}
 
 	public void setCatatan(String catatan){
@@ -121,10 +132,11 @@ public class BuatTransaksi{
 		return 
 			"BuatTransaksi{" + 
 			"buatTransaksi = '" + buatTransaksi + '\'' + 
+			",status_update = '" + statusUpdate + '\'' + 
 			",id_kategori = '" + idKategori + '\'' + 
-			",id_penyimpanan = '" + idPenyimpanan + '\'' + 
 			",jumlah = '" + jumlah + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
+			",status_delete = '" + statusDelete + '\'' + 
 			",catatan = '" + catatan + '\'' + 
 			",created_at = '" + createdAt + '\'' + 
 			",id_user = '" + idUser + '\'' + 

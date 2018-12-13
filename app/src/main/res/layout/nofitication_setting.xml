@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <Switch
+        android:fontFamily="sans-serif-condensed"
         android:textSize="@dimen/text_regular_form"
         android:id="@+id/switch_daily_notification"
         android:background="@drawable/item_value_background"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Aktifkan Pengingat Harian ?" />
     <Button
+        android:fontFamily="sans-serif-condensed"
         android:textSize="@dimen/text_regular_form"
         android:layout_gravity="center"
         android:id="@+id/btn_time"

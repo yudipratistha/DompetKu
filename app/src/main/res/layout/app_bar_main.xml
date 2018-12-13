@@ -16,7 +16,7 @@
             app:elevation="0dp">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:background="@color/colorAccentGreen"
+                style="@style/CustomTheme"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextAppearance="@style/Toolbar_TitleText"
@@ -39,6 +39,7 @@
                         android:focusable="true"/>
                     <TextView
                         android:textSize="@dimen/nav_text"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold"
                         android:textColor="@color/primaryTextColor"
                         android:gravity="center_vertical"
@@ -59,25 +60,25 @@
                         android:tint="@color/mdtp_white"
                         android:layout_toRightOf="@+id/text_month"/>
                 </RelativeLayout>
-                <ImageButton
-                    android:layout_gravity="end"
-                    android:id="@+id/toolbar_wallet"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/appbar_tab"
-                    android:src="@drawable/ic_cat_account_balance_wallet_black_24dp"
-                    android:tint="@color/mdtp_white"/>
-                <ImageButton
-                    android:layout_gravity="end"
-                    android:id="@+id/toolbar_filter"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_filter_list_black_24dp"
-                    android:tint="@color/mdtp_white"/>
+                <!--<ImageButton-->
+                    <!--android:layout_gravity="end"-->
+                    <!--android:id="@+id/toolbar_wallet"-->
+                    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                    <!--android:visibility="visible"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="@dimen/appbar_tab"-->
+                    <!--android:src="@drawable/ic_cat_account_balance_wallet_black_24dp"-->
+                    <!--android:tint="@color/mdtp_white"/>-->
+                <!--<ImageButton-->
+                    <!--android:layout_gravity="end"-->
+                    <!--android:id="@+id/toolbar_filter"-->
+                    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                    <!--android:visibility="visible"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/ic_filter_list_black_24dp"-->
+                    <!--android:tint="@color/mdtp_white"/>-->
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
         <FrameLayout

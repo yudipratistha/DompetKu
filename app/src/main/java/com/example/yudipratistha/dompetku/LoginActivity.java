@@ -13,7 +13,10 @@ import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
+import com.example.yudipratistha.dompetku.model.LihatTransaksi;
+import com.example.yudipratistha.dompetku.model.User;
 import com.example.yudipratistha.dompetku.model.UserLogin;
+import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected EditText etEmail, etName, etPassword;
     protected Button btn_login;
     protected TextView btn_daftar;
-
+    private SharedPreferences.Editor profile;
     APIService service;
 
     @Override
@@ -65,14 +68,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
                                     SharedPreferences sharedPref = getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
 
-                                    SharedPreferences.Editor editor = sharedPref.edit();
-                                    editor.putString("email_user", etEmail.getText().toString());
-                                    editor.putString("nama_user", etPassword.getText().toString());
-                                    editor.putBoolean("status_login", response.body().isStatus());
-                                    editor.apply();
-
-                                    Intent tampilanUtama = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(tampilanUtama);
+                                    profile = sharedPref.edit();
+                                    profile.putString("email_user", etEmail.getText().toString());
+                                    profile.putString("nama_user", etPassword.getText().toString());
+                                    profile.putInt("id", response.body().getDataPengguna().getId());
+                                    profile.putBoolean("status_login", response.body().isStatus());
+                                    profile.apply();
+                                    inserLogin();
                                     finish();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Gagal ada masalah pengisian", Toast.LENGTH_LONG).show();
@@ -95,5 +97,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+    }
+    
+    private void inserLogin(){
+        DompetkuSqLite.getInstance(getApplicationContext()).emptyProfiles();
+        DompetkuSqLite.getInstance(getApplicationContext()).emptyTransaksi();
+        DompetkuSqLite.getInstance(getApplicationContext()).insertProfileId((User) profile);
+        service.lihatTransaksi(((User) profile).getId())
+                .enqueue(new Callback<LihatTransaksi>() {
+                    @Override
+                    public void onResponse(Call<LihatTransaksi> call, Response<LihatTransaksi> response) {
+                        if (response.isSuccessful() && response.body().getLihatTransaksi().size() > 0) {
+                            Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
+                            DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksiLogin(response.body().getLihatTransaksi());
+                            Intent tampilanUtama = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(tampilanUtama);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Gagal insert task", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LihatTransaksi> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Gagal konek task" + t, Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout android:layout_width="fill_parent"
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/app_bar_main" />
     <android.support.v4.widget.NestedScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingTop="60dp">
+        android:layout_height="fill_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -29,6 +26,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="16sp"
                         android:textColor="@color/colorBlack"
                         android:gravity="left"
@@ -38,9 +36,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5.0dip"
                         android:layout_marginBottom="5.0dip"
-                        android:text="Saldo"
-                        fontPath="fonts/Lato-Bold.ttf" />
+                        android:text="Saldo" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="16sp"
                         android:textColor="@color/colorAccentRed"
                         android:gravity="end"
@@ -50,10 +48,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5.0dip"
-                        android:text="-"
+                        android:text="Rp.111"
                         android:layout_toRightOf="@id/text_account"
                         android:layout_alignParentRight="true" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorPrimaryBlueGrey"
                         android:gravity="left"
@@ -63,9 +62,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5.0dip"
                         android:text="Pengeluaran"
-                        android:layout_below="@id/text_account"
-                        fontPath="fonts/Lato-Bold.ttf" />
+                        android:layout_below="@id/text_account" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorAccentRed"
                         android:gravity="end"
@@ -74,11 +73,12 @@
                         android:padding="7.0dip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp.2231233312312321123233"
+                        android:text="Rp.0"
                         android:layout_alignBaseline="@id/title_expense"
                         android:layout_alignBottom="@id/title_expense"
                         android:layout_alignParentRight="true" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorPrimaryBlueGrey"
                         android:gravity="left"
@@ -88,9 +88,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5.0dip"
                         android:text="Pemasukan"
-                        android:layout_below="@id/title_expense"
-                        fontPath="fonts/Lato-Bold.ttf" />
+                        android:layout_below="@id/title_expense" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorAccentBlue"
                         android:gravity="end"
@@ -99,7 +99,7 @@
                         android:padding="7.0dip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp.2231233312312321123233"
+                        android:text="Rp.0"
                         android:layout_toRightOf="@id/title_income"
                         android:layout_below="@id/text_pengeluaran_total"
                         android:layout_alignParentRight="true" />
@@ -111,6 +111,7 @@
                         android:layout_marginLeft="10.0dip"
                         android:layout_below="@id/text_pendapatan_total" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorPrimaryBlueGrey"
                         android:gravity="left"
@@ -120,9 +121,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5.0dip"
                         android:text="Arus kas bulan ini"
-                        android:layout_below="@id/separator"
-                        fontPath="fonts/Lato-Bold.ttf" />
+                        android:layout_below="@id/separator" />
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textColor="@color/colorPrimaryBlue"
                         android:gravity="end"
@@ -131,7 +132,7 @@
                         android:padding="7.0dip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp.1010101002020"
+                        android:text="Rp.0"
                         android:layout_toRightOf="@id/title_income"
                         android:layout_below="@id/separator"
                         android:layout_alignParentRight="true" />
@@ -150,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="0dp"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_add_black_24dp"
         android:tint="#FFF"/>
 </android.support.design.widget.CoordinatorLayout>

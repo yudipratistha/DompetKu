@@ -5,46 +5,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:background="@color/colorAccentGreen"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:titleTextAppearance="@style/Toolbar_TitleText"
-                app:titleTextColor="@color/colorAccentGreen">
-                <RelativeLayout
-                    android:id="@+id/layout_month_selection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textSize="@dimen/nav_text"
-                        android:textStyle="bold"
-                        android:textColor="@color/primaryTextColor"
-                        android:gravity="center_vertical"
-                        android:id="@+id/text_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Histori Transaksi"
-                        android:layout_centerVertical="true"/>
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="886dp"
-        android:orientation="vertical"
-        android:paddingTop="60dp">
+        android:orientation="vertical">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -63,55 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
-                        android:textSize="@dimen/text_regular_form"
-                        android:textStyle="bold"
-                        android:id="@+id/textView6"
-                        android:background="@color/colorPrimary_light"
-                        android:padding="@dimen/default_gap"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Total Saldo:"/>
-                    <LinearLayout android:orientation="horizontal"
-                        android:paddingTop="@dimen/default_gap"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:textSize="@dimen/text_regular_form_label"
-                            android:id="@+id/textSaldoAwal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Saldo Awal"/>
-                        <TextView
-                            android:textSize="@dimen/text_regular_form"
-                            android:gravity="end"
-                            android:id="@+id/text_saldo_awal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="9.000.000"
-                            android:layout_weight="1"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/default_gap"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:textSize="@dimen/text_regular_form_label"
-                            android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Saldo Akhir"/>
-                        <TextView
-                            android:textSize="@dimen/text_regular_form"
-                            android:gravity="end"
-                            android:id="@+id/text_saldo_akhir"
-                            android:paddingBottom="@dimen/default_gap"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="-2.004.004"
-                            android:layout_weight="1"/>
-                    </LinearLayout>
-                    <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="@dimen/text_regular_form"
                         android:textStyle="bold"
                         android:id="@+id/textView7"
@@ -126,12 +43,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <TextView
+                            android:fontFamily="sans-serif-condensed"
                             android:textSize="@dimen/text_regular_form_label"
                             android:id="@+id/textView8x"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pemasukan"/>
                         <TextView
+                            android:fontFamily="sans-serif-condensed"
                             android:textSize="@dimen/text_regular_form"
                             android:gravity="end"
                             android:id="@+id/text_pendapatan_total"
@@ -146,12 +65,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <TextView
+                            android:fontFamily="sans-serif-condensed"
                             android:textSize="@dimen/text_regular_form_label"
                             android:id="@+id/textView10xc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pengeluaran"/>
                         <TextView
+                            android:fontFamily="sans-serif-condensed"
                             android:textSize="@dimen/text_regular_form"
                             android:textColor="@android:color/holo_red_light"
                             android:gravity="end"
@@ -164,6 +85,7 @@
                             android:layout_weight="1"/>
                     </LinearLayout>
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="@dimen/text_regular_form"
                         android:gravity="end"
                         android:layout_gravity="end"
@@ -174,6 +96,7 @@
                         android:text="Rp.2.004.004"
                         android:layout_weight="1"/>
                     <TextView
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="@dimen/text_regular_form"
                         android:textStyle="bold"
                         android:id="@+id/textView71"
@@ -182,20 +105,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Chart Kategori:"/>
-                    <!--<lecho.lib.hellocharts.view.PieChartView-->
-                        <!--android:id="@+id/chart_pemasukan"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginTop="@dimen/default_gap_form"-->
-                        <!--android:layout_marginBottom="@dimen/default_gap_form"-->
-                        <!--android:minHeight="180dp"/>-->
-                    <!--<lecho.lib.hellocharts.view.PieChartView-->
-                        <!--android:id="@+id/chart_pengeluaran"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginTop="@dimen/default_gap_form"-->
-                        <!--android:layout_marginBottom="@dimen/default_gap_form"-->
-                        <!--android:minHeight="180dp"/>-->
+                    <lecho.lib.hellocharts.view.PieChartView
+                        android:id="@+id/chart_pemasukan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/default_gap_form"
+                        android:layout_marginBottom="@dimen/default_gap_form"
+                        android:minHeight="180dp"/>
+                    <lecho.lib.hellocharts.view.PieChartView
+                        android:id="@+id/chart_pengeluaran"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/default_gap_form"
+                        android:layout_marginBottom="@dimen/default_gap_form"
+                        android:minHeight="180dp"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

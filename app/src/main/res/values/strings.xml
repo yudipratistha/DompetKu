@@ -7,4 +7,9 @@
     <string name="jenis">Jenis Pengeluaran</string>
     <string name="hari_ini">Hari Ini</string>
     <string name="minus">-</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="historiTransaksi">Histori Transaksi</string>
+    <string name="laporanKeuangan">Laporan Keuangan</string>
+    <string name="profil">Profil</string>
+    <string name="action_settings">Setting</string>
 </resources>

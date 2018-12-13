@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
 import com.example.yudipratistha.dompetku.model.Signup;
+import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +56,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void onResponse(Call<Signup> call, Response<Signup> response) {
                                 if (response.isSuccessful()){
+                                    DompetkuSqLite.getInstance(getApplicationContext()).insertKategoris(response.body().getId());
                                     Toast.makeText(SignupActivity.this,"Sukses",Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                 }

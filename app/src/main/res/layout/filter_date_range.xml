@@ -15,6 +15,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <Button
+                android:fontFamily="sans-serif-condensed"
                 android:textSize="@dimen/text_small"
                 android:layout_gravity="center"
                 android:id="@+id/btn_date_start"
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="-" />
             <Button
+                android:fontFamily="sans-serif-condensed"
                 android:textSize="@dimen/text_small"
                 android:layout_gravity="center"
                 android:id="@+id/btn_date_end"

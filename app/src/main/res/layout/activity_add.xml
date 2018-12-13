@@ -22,16 +22,16 @@
                 app:navigationIcon="@drawable/ic_clear_black_24dp"
                 app:title="Edit / Tambah Transaksi"
                 app:titleTextColor="@color/colorPrimary_light" >
-            <ImageButton
-                android:layout_gravity="end"
-                android:id="@+id/toolbar_wallet"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/appbar_tab"
-                android:src="@drawable/ic_done_black_24dp"
-                android:tint="@color/mdtp_white"/>
+            <!--<ImageButton-->
+                <!--android:layout_gravity="end"-->
+                <!--android:id="@+id/toolbar_wallet"-->
+                <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                <!--android:visibility="visible"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/appbar_tab"-->
+                <!--android:src="@drawable/ic_done_black_24dp"-->
+                <!--android:tint="@color/mdtp_white"/>-->
             </android.support.v7.widget.Toolbar>
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
@@ -70,7 +70,8 @@
                     android:paddingLeft="20.0dip"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:text="@string/minus" />
+                    android:hint="@string/minus"
+                    />
                 <EditText
                     android:textSize="@dimen/text_value_input"
                     android:textColor="@android:color/darker_gray"
@@ -137,48 +138,93 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0.0dip"
                 android:layout_weight="1.0" />
-            <Button
-                android:textSize="@dimen/text_regular"
-                android:textAlignment="textStart"
-                android:layout_gravity="start"
-                android:id="@+id/input_category"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_white_border_bottom">
+                <ImageView
+                    android:id="@+id/icon_kategori"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:tint="#444"
+                    android:src="@drawable/ic_cat_local_dining_black_24dp" />
+                <Spinner
+                    android:id="@+id/kategori_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="sans-serif-condensed"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:background="@drawable/item_white_border_bottom"
-                android:padding="@dimen/text_regular_padding"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/jenis"
-                android:ems="10"
-                android:drawableLeft="@drawable/ic_folder_special_black_24dp"
-                android:drawablePadding="@dimen/default_gap"
-                android:drawableStart="@drawable/ic_folder_special_black_24dp" />
-            <Button
-                android:textSize="@dimen/text_regular"
-                android:textAlignment="textStart"
-                android:layout_gravity="start"
-                android:id="@+id/input_date"
-                android:background="@drawable/item_white_border_bottom"
-                android:padding="@dimen/text_regular_padding"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hari_ini"
-                android:ems="10"
-                android:drawableLeft="@drawable/ic_cat_date_range_black_24dp"
-                android:drawablePadding="@dimen/default_gap"
-                android:drawableStart="@drawable/ic_cat_date_range_black_24dp" />
-            <Button
-                android:textSize="@dimen/text_regular"
-                android:textAlignment="textStart"
-                android:layout_gravity="start"
-                android:id="@+id/input_account"
-                android:background="@drawable/item_white_border_bottom"
-                android:padding="@dimen/text_regular_padding"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Dompet"
-                android:ems="10"
-                android:drawableLeft="@drawable/ic_cat_account_balance_wallet_black_24dp"
-                android:drawablePadding="@dimen/default_gap"
-                android:drawableStart="@drawable/ic_cat_account_balance_wallet_black_24dp" />
+                android:weightSum="1.0">
+                <EditText
+                    android:textSize="@dimen/text_regular"
+                    android:id="@+id/input_date"
+                    android:focusable="false"
+                    android:background="@drawable/item_white_border_bottom"
+                    android:padding="@dimen/text_regular_padding"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hari_ini"
+                    android:ems="10"
+                    android:maxLength="40"
+                    android:drawableLeft="@drawable/ic_cat_event_note_black_24dp"
+                    android:drawablePadding="@dimen/default_gap"
+                    android:layout_weight="0.97"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionDone"
+                    android:drawableStart="@drawable/ic_cat_event_note_black_24dp" />
+            </LinearLayout>
+
+
+            <!--<Button-->
+                <!--android:textSize="@dimen/text_regular"-->
+                <!--android:textAlignment="textStart"-->
+                <!--android:layout_gravity="start"-->
+                <!--android:id="@+id/input_category"-->
+                <!--android:background="@drawable/item_white_border_bottom"-->
+                <!--android:padding="@dimen/text_regular_padding"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="@string/jenis"-->
+                <!--android:ems="10"-->
+                <!--android:drawableLeft="@drawable/ic_folder_special_black_24dp"-->
+                <!--android:drawablePadding="@dimen/default_gap"-->
+                <!--android:drawableStart="@drawable/ic_folder_special_black_24dp" />-->
+            <!--<Button-->
+                <!--android:textSize="@dimen/text_regular"-->
+                <!--android:textAlignment="textStart"-->
+                <!--android:layout_gravity="start"-->
+                <!--android:id="@+id/input_date"-->
+                <!--android:background="@drawable/item_white_border_bottom"-->
+                <!--android:padding="@dimen/text_regular_padding"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="@string/hari_ini"-->
+                <!--android:ems="10"-->
+                <!--android:drawableLeft="@drawable/ic_cat_date_range_black_24dp"-->
+                <!--android:drawablePadding="@dimen/default_gap"-->
+                <!--android:drawableStart="@drawable/ic_cat_date_range_black_24dp" />-->
+            <!--<Button-->
+                <!--android:textSize="@dimen/text_regular"-->
+                <!--android:textAlignment="textStart"-->
+                <!--android:layout_gravity="start"-->
+                <!--android:id="@+id/input_account"-->
+                <!--android:background="@drawable/item_white_border_bottom"-->
+                <!--android:padding="@dimen/text_regular_padding"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Dompet"-->
+                <!--android:ems="10"-->
+                <!--android:drawableLeft="@drawable/ic_cat_account_balance_wallet_black_24dp"-->
+                <!--android:drawablePadding="@dimen/default_gap"-->
+                <!--android:drawableStart="@drawable/ic_cat_account_balance_wallet_black_24dp" />-->
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -8,45 +8,9 @@
     tools:context=".ProfileFragment">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:background="@color/colorAccentGreen"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:titleTextAppearance="@style/Toolbar_TitleText"
-                app:titleTextColor="@color/colorAccentGreen">
-                <RelativeLayout
-                    android:id="@+id/layout_month_selection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textSize="@dimen/nav_text"
-                        android:textStyle="bold"
-                        android:textColor="@color/primaryTextColor"
-                        android:gravity="center_vertical"
-                        android:id="@+id/text_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pengaturan Profil"
-                        android:layout_centerVertical="true"/>
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="886dp"
-        android:orientation="vertical"
-        android:paddingTop="60dp">
+        android:orientation="vertical">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -75,23 +39,11 @@
                             android:id="@+id/name_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Name" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
-                <!--<TextView-->
-                    <!--android:layout_marginStart="24dp"-->
-                    <!--android:layout_marginBottom="16dp"-->
-                    <!--android:textColor="#222"-->
-                    <!--android:fontFamily="@font/poppins_medium"-->
-                    <!--android:text="Activity goals"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<View-->
-                    <!--android:background="#EEE"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"/>-->
                 <LinearLayout
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
@@ -110,7 +62,7 @@
                             android:id="@+id/move_minute_input"
                             android:layout_width="335dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Email"
                             android:inputType="number" />
                     </android.support.design.widget.TextInputLayout>
@@ -138,7 +90,7 @@
                             android:id="@+id/gender_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Jenis Kelamin" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -154,7 +106,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="false"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Tanggal Lahir" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.v7.widget.AppCompatButton
@@ -171,7 +123,8 @@
                     android:layout_marginBottom="1dp"
                     android:layout_marginTop="30dp"
                     android:textColor="#222"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="16sp"
                     android:text="Ganti Password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -180,9 +133,9 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="0dp"
                     android:textColor="#222"
-                    android:textSize="9.74sp"
+                    android:textSize="12sp"
                     android:textStyle="italic"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="Tinggalkan kolom ganti password kosong, bila tidak menggantinya."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -209,7 +162,7 @@
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Password" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -231,7 +184,7 @@
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="sans-serif-condensed"
                             android:hint="Confirm Password" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>

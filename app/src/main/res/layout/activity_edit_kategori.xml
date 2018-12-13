@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:theme="?actionBarTheme"
+        android:id="@id/toolbar"
+        android:background="?colorPrimary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?actionBarSize"
+        app:title="Tambah Kategori"
+        app:navigationIcon="@drawable/ic_clear_black_24dp"
+        app:titleTextColor="@color/colorPrimary_light" />
+    <TextView
+        android:textSize="@dimen/text_regular"
+        android:id="@+id/kategori_name"
+        android:background="@drawable/item_white_border_bottom"
+        android:padding="@dimen/text_regular_padding"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Kategori Pengeluaran"
+        android:ems="10"
+        android:drawablePadding="@dimen/default_gap" />
+    <EditText
+        android:textSize="@dimen/text_regular"
+        android:id="@+id/category_name"
+        android:background="@drawable/item_white_border_bottom"
+        android:padding="@dimen/text_regular_padding"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Kategori"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_folder_special_black_24dp"
+        android:drawablePadding="@dimen/default_gap"
+        android:inputType="textPersonName"
+        android:drawableStart="@drawable/ic_folder_special_black_24dp" />
+    <Button
+        android:textSize="@dimen/text_regular"
+        android:layout_gravity="start"
+        android:id="@+id/button_select_icon"
+        android:background="@drawable/item_white_border_bottom"
+        android:padding="@dimen/text_regular_padding"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pilih icon"
+        android:ems="10"
+        android:drawableLeft="@drawable/black_dropdown"
+        android:drawablePadding="@dimen/default_gap"
+        android:drawableStart="@drawable/black_dropdown"
+        android:textAlignment="textStart" />
+</LinearLayout>
