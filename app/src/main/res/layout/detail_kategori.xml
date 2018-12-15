@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        style="@style/CustomTheme"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        app:layout_anchor="@layout/app_bar_text"
+        app:layout_anchorGravity="bottom"
+        app:tabIndicatorColor="@color/primaryTextColor"
+        app:tabIndicatorHeight="3.0dip"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/primaryTextColor"
+        app:tabTextColor="@color/mdtp_line_background"
+        app:elevation="50dp">
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Pengeluaran" />
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Pemasukan" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tabs">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/transaksi_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="80dp"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/transaksi_item" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

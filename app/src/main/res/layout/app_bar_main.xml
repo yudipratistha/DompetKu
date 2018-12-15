@@ -38,10 +38,10 @@
                         android:clickable="true"
                         android:focusable="true"/>
                     <TextView
-                        android:textSize="@dimen/nav_text"
                         android:fontFamily="sans-serif-condensed"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/primaryTextColor"
+                        android:textColor="@color/colorPrimary_light"
                         android:gravity="center_vertical"
                         android:id="@+id/text_month"
                         android:layout_width="wrap_content"

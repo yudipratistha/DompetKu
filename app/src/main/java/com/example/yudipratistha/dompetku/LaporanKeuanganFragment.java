@@ -69,17 +69,7 @@ public class LaporanKeuanganFragment extends Fragment {
         filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
         filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
         filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-        int text_pendapatan = DompetkuSqLite.getInstance(getContext()).getLaporanPeng(filterStartStr, filterEndStr);
-        int text_pengeluaran = DompetkuSqLite.getInstance(getContext()).getLaporanPem(filterStartStr, filterEndStr);
-        int total_saldo = DompetkuSqLite.getInstance(getContext()).getLaporanSaldoTotal(filterStartStr, filterEndStr);
-
-        String totalPendapatan = "Rp. " + String.valueOf(text_pendapatan);
-        text_pendapatan_total.setText(totalPendapatan);
-        String totalPeng = "Rp. " + String.valueOf(text_pengeluaran);
-        text_pengeluaran_total.setText(totalPeng);
-        String totalSaldo = "Rp. " + String.valueOf(total_saldo);
-        text_jumlah_total.setText(totalSaldo);
-
+        pemasukanPengeluaran(filterStartStr, filterEndStr);
 
         //display datepicker
         filterstart.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +85,7 @@ public class LaporanKeuanganFragment extends Fragment {
                                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                                 filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
                                 filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                                int text_pendapatan = DompetkuSqLite.getInstance(getContext()).getLaporanPeng(filterStartStr, filterEndStr);
-                                int text_pengeluaran = DompetkuSqLite.getInstance(getContext()).getLaporanPem(filterStartStr, filterEndStr);
-                                int total_saldo = DompetkuSqLite.getInstance(getContext()).getLaporanSaldoTotal(filterStartStr, filterEndStr);
-
-                                String totalPendapatan = "Rp. " + String.valueOf(text_pendapatan);
-                                text_pendapatan_total.setText(totalPendapatan);
-                                String totalPeng = "Rp. " + String.valueOf(text_pengeluaran);
-                                text_pengeluaran_total.setText(totalPeng);
-                                String totalSaldo = "Rp. " + String.valueOf(total_saldo);
-                                text_jumlah_total.setText(totalSaldo);
+                                pemasukanPengeluaran(filterStartStr, filterEndStr);
                             }
                         },
                         myCalendar.get(Calendar.YEAR),
@@ -129,16 +110,7 @@ public class LaporanKeuanganFragment extends Fragment {
                                 myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                                 filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
                                 filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                                int text_pendapatan = DompetkuSqLite.getInstance(getContext()).getLaporanPeng(filterStartStr, filterEndStr);
-                                int text_pengeluaran = DompetkuSqLite.getInstance(getContext()).getLaporanPem(filterStartStr, filterEndStr);
-                                int total_saldo = DompetkuSqLite.getInstance(getContext()).getLaporanSaldoTotal(filterStartStr, filterEndStr);
-
-                                String totalPendapatan = "Rp. " + String.valueOf(text_pendapatan);
-                                text_pendapatan_total.setText(totalPendapatan);
-                                String totalPeng = "Rp. " + String.valueOf(text_pengeluaran);
-                                text_pengeluaran_total.setText(totalPeng);
-                                String totalSaldo = "Rp. " + String.valueOf(total_saldo);
-                                text_jumlah_total.setText(totalSaldo);
+                                pemasukanPengeluaran(filterStartStr, filterEndStr);
                             }
                         },
                         myCalendar2.get(Calendar.YEAR),
@@ -153,6 +125,25 @@ public class LaporanKeuanganFragment extends Fragment {
 
 
 
+    }
+
+    private void pemasukanPengeluaran(String date, String date2){
+        int text_pengeluaran = DompetkuSqLite.getInstance(getContext()).getLaporanPeng(date, date2);
+        int text_pendapatan = DompetkuSqLite.getInstance(getContext()).getLaporanPem(date, date2);
+        int total_saldo = DompetkuSqLite.getInstance(getContext()).getLaporanSaldoTotal(date, date2);
+
+        if (total_saldo > 0 ){
+            text_jumlah_total.setTextColor(getResources().getColor(R.color.colorAccentBlue));
+        }else if (total_saldo < 0){
+            text_jumlah_total.setTextColor(getResources().getColor(R.color.colorAccentRed));
+        }
+        String totalPendapatan = "Rp. " + String.valueOf(text_pendapatan);
+        String totalPeng = "Rp. " + String.valueOf(text_pengeluaran);
+        String totalSaldo = "Rp. " + String.valueOf(total_saldo);
+
+        text_pendapatan_total.setText(totalPendapatan);
+        text_pengeluaran_total.setText(totalPeng);
+        text_jumlah_total.setText(totalSaldo);
     }
 
 

@@ -27,7 +27,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected EditText etEmail, etName, etPassword;
     protected Button btn_login;
     protected TextView btn_daftar;
-    private SharedPreferences.Editor profile;
+    protected static int isSuccess = 0;
+    protected static int id_user;
+    protected static String email_user;
+    protected static String name_user;
+    protected static String created_at_user;
+    protected static String updated_at_user;
+    private User profile;
+
     APIService service;
 
     @Override
@@ -56,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         service = APIClient.getService();
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -68,14 +76,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
                                     SharedPreferences sharedPref = getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
 
-                                    profile = sharedPref.edit();
-                                    profile.putString("email_user", etEmail.getText().toString());
-                                    profile.putString("nama_user", etPassword.getText().toString());
-                                    profile.putInt("id", response.body().getDataPengguna().getId());
-                                    profile.putBoolean("status_login", response.body().isStatus());
-                                    profile.apply();
-                                    inserLogin();
-                                    finish();
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("email_user", etEmail.getText().toString());
+                                    editor.putString("nama_user", etPassword.getText().toString());
+                                    editor.putInt("id", response.body().getDataPengguna().getId());
+                                    editor.putBoolean("status_login", response.body().isStatus());
+                                    editor.apply();
+                                    id_user = response.body().getDataPengguna().getId();
+                                    email_user = response.body().getDataPengguna().getEmail();
+                                    name_user = response.body().getDataPengguna().getName();
+                                    created_at_user = response.body().getDataPengguna().getCreatedAt();
+                                    updated_at_user = response.body().getDataPengguna().getUpdatedAt();
+                                    profile = new User();
+                                    profile.setId(id_user);
+                                    profile.setCreatedAt(created_at_user);
+                                    profile.setUpdatedAt(updated_at_user);
+                                    profile.setName(name_user);
+                                    profile.setEmail(email_user);
+
+                                    insertLogin();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Gagal ada masalah pengisian", Toast.LENGTH_LONG).show();
                                 }
@@ -86,9 +105,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(LoginActivity.this, "Gagal" + t, Toast.LENGTH_LONG).show();
                             }
                         });
-
-
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 break;
             case R.id.link_signup:
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
@@ -99,29 +115,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
     
-    private void inserLogin(){
+    private void insertLogin(){
         DompetkuSqLite.getInstance(getApplicationContext()).emptyProfiles();
         DompetkuSqLite.getInstance(getApplicationContext()).emptyTransaksi();
-        DompetkuSqLite.getInstance(getApplicationContext()).insertProfileId((User) profile);
-        service.lihatTransaksi(((User) profile).getId())
+        DompetkuSqLite.getInstance(getApplicationContext()).insertProfileId(profile);
+        service.lihatTransaksi(id_user)
                 .enqueue(new Callback<LihatTransaksi>() {
                     @Override
                     public void onResponse(Call<LihatTransaksi> call, Response<LihatTransaksi> response) {
-                        if (response.isSuccessful() && response.body().getLihatTransaksi().size() > 0) {
+                        if (response.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
                             DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksiLogin(response.body().getLihatTransaksi());
                             Intent tampilanUtama = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(tampilanUtama);
                             finish();
+
+
                         } else {
-                            Toast.makeText(LoginActivity.this, "Gagal insert task", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Gagal insert data", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LihatTransaksi> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Gagal konek task" + t, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Koneksi gagal" + t, Toast.LENGTH_LONG).show();
                     }
                 });
+
     }
 }

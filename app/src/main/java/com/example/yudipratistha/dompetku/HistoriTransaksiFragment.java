@@ -21,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.yudipratistha.dompetku.adapter.HistoriTransaksiAdapter;
+import com.example.yudipratistha.dompetku.adapter.TransaksiAdapter;
 import com.example.yudipratistha.dompetku.model.DataPengguna;
 import com.example.yudipratistha.dompetku.model.LihatTransaksiItem;
 import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
@@ -31,16 +32,17 @@ import java.util.Date;
 import java.util.List;
 
 public class HistoriTransaksiFragment extends Fragment {
-    public DataPengguna profile;
+    private DataPengguna profile;
     private RecyclerView transaksi_list;
     Calendar myCalendar;
     Calendar myCalendar2;
-    public Button filterstart;
-    public Button filterend;
-    public String filterStartStr;
-    public String filterEndStr;
-    public HistoriTransaksiAdapter adapter;
-    public List<LihatTransaksiItem> lihatTransaksiItems;
+    private Button filterstart;
+    private Button filterend;
+    private String filterStartStr;
+    private String filterEndStr;
+    private String tipeTrans;
+    private HistoriTransaksiAdapter adapter;
+    private List<LihatTransaksiItem> lihatTransaksiItems;
 
 
     public HistoriTransaksiFragment() {}
@@ -91,7 +93,58 @@ public class HistoriTransaksiFragment extends Fragment {
         filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
         filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
         filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+        historiTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+        tipeTrans= "Pengeluaran";
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                switch (tab.getPosition()){
+                    case 0:
+                        myCalendar = Calendar.getInstance();
+                        myCalendar.add(Calendar.DATE, -7);
+                        myCalendar2 = Calendar.getInstance();
+                        filterstart = getActivity().findViewById(R.id.btn_date_start);
+                        filterend = getActivity().findViewById(R.id.btn_date_end);
+                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
+                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
+                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
+                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
+                        tipeTrans= "Pengeluaran";
+                        historiTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+
+                    case 1:
+                        myCalendar = Calendar.getInstance();
+                        myCalendar.add(Calendar.DATE, -7);
+                        myCalendar2 = Calendar.getInstance();
+                        filterstart = getActivity().findViewById(R.id.btn_date_start);
+                        filterend = getActivity().findViewById(R.id.btn_date_end);
+                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
+                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
+                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
+                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
+                        tipeTrans= "Pemasukan";
+                        historiTransaksi(filterStartStr, filterEndStr, "Pemasukan");
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+
+        });
+    }
+
+    private void historiTransaksi(String date, final String date2, final String tipe){
+        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(date, date2, tipe);
         adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
         transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         transaksi_list.setAdapter(adapter);
@@ -109,7 +162,7 @@ public class HistoriTransaksiFragment extends Fragment {
                                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                                 filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
                                 filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, tipe);
                                 adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
                                 transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                                 transaksi_list.setAdapter(adapter);
@@ -139,7 +192,7 @@ public class HistoriTransaksiFragment extends Fragment {
                                 filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
                                 Log.d("Date", String.valueOf(filterStartStr));
                                 Log.d("Date", String.valueOf(filterEndStr));
-                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, tipe);
                                 adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
                                 transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                                 transaksi_list.setAdapter(adapter);
@@ -154,185 +207,21 @@ public class HistoriTransaksiFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                switch (tab.getPosition()){
-                    case 0:
-                        myCalendar = Calendar.getInstance();
-                        myCalendar.add(Calendar.DATE, -7);
-                        myCalendar2 = Calendar.getInstance();
-                        filterstart = getActivity().findViewById(R.id.btn_date_start);
-                        filterend = getActivity().findViewById(R.id.btn_date_end);
-                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
-                        adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                        transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                        transaksi_list.setAdapter(adapter);
-
-                        //display datepicker
-                        filterstart.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                        getContext(),
-                                        new DatePickerDialog.OnDateSetListener() {
-                                            @Override
-                                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                                myCalendar.set(Calendar.YEAR, year);
-                                                myCalendar.set(Calendar.MONTH, monthOfYear);
-                                                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                                filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                                                filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
-                                                adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                                                transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                                                transaksi_list.setAdapter(adapter);
-                                            }
-                                        },
-                                        myCalendar.get(Calendar.YEAR),
-                                        myCalendar.get(Calendar.MONTH),
-                                        myCalendar.get(Calendar.DAY_OF_MONTH)
-                                );
-                                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                                datePickerDialog.show();
-                            }
-                        });
-
-                        filterend.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                        getContext(),
-                                        new DatePickerDialog.OnDateSetListener() {
-                                            @Override
-                                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                                myCalendar2.set(Calendar.YEAR, year);
-                                                myCalendar2.set(Calendar.MONTH, monthOfYear);
-                                                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                                filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                                                filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                                                Log.d("Date", String.valueOf(filterStartStr));
-                                                Log.d("Date", String.valueOf(filterEndStr));
-                                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
-                                                adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                                                transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                                                transaksi_list.setAdapter(adapter);
-                                            }
-                                        },
-                                        myCalendar2.get(Calendar.YEAR),
-                                        myCalendar2.get(Calendar.MONTH),
-                                        myCalendar2.get(Calendar.DAY_OF_MONTH)
-                                );
-
-                                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                                datePickerDialog.show();
-                            }
-                        });
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-
-                    case 1:
-                        myCalendar = Calendar.getInstance();
-                        myCalendar.add(Calendar.DATE, -7);
-                        myCalendar2 = Calendar.getInstance();
-                        filterstart = getActivity().findViewById(R.id.btn_date_start);
-                        filterend = getActivity().findViewById(R.id.btn_date_end);
-                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pemasukan");
-                        adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                        transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                        transaksi_list.setAdapter(adapter);
-
-                        //display datepicker
-                        filterstart.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                        getContext(),
-                                        new DatePickerDialog.OnDateSetListener() {
-                                            @Override
-                                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                                myCalendar.set(Calendar.YEAR, year);
-                                                myCalendar.set(Calendar.MONTH, monthOfYear);
-                                                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                                filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                                                filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pemasukan");
-                                                adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                                                transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                                                transaksi_list.setAdapter(adapter);
-                                            }
-                                        },
-                                        myCalendar.get(Calendar.YEAR),
-                                        myCalendar.get(Calendar.MONTH),
-                                        myCalendar.get(Calendar.DAY_OF_MONTH)
-                                );
-                                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                                datePickerDialog.show();
-                            }
-                        });
-
-                        filterend.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                        getContext(),
-                                        new DatePickerDialog.OnDateSetListener() {
-                                            @Override
-                                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                                myCalendar2.set(Calendar.YEAR, year);
-                                                myCalendar2.set(Calendar.MONTH, monthOfYear);
-                                                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                                filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                                                filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                                                Log.d("Date", String.valueOf(filterStartStr));
-                                                Log.d("Date", String.valueOf(filterEndStr));
-                                                lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(filterStartStr, filterEndStr, "Pemasukan");
-                                                adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-                                                transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                                                transaksi_list.setAdapter(adapter);
-                                            }
-                                        },
-                                        myCalendar2.get(Calendar.YEAR),
-                                        myCalendar2.get(Calendar.MONTH),
-                                        myCalendar2.get(Calendar.DAY_OF_MONTH)
-                                );
-
-                                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                                datePickerDialog.show();
-                            }
-                        });
-                }
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-
-        });
     }
 
+//    private void initData(){
+//        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(historiTransaksi;);
+//        transaksi_list = getActivity().findViewById(R.id.transaksi_list);
+//        adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
+//        transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        transaksi_list.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
-//        activityList = TriathlogDbHelper.getInstance(getActivity()).getAllActivity();
-//        adapter.setItems(activityList);
-//        adapter.notifyDataSetChanged();
+//        initData();
     }
 
 

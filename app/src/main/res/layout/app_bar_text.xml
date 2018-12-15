@@ -23,9 +23,9 @@
             android:layout_height="wrap_content">
             <TextView
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="@dimen/nav_text"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/colorPrimary_light"
                 android:gravity="center_vertical"
                 android:id="@+id/text_judul"
                 android:layout_width="wrap_content"

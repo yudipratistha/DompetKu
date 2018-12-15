@@ -133,12 +133,12 @@ public class LihatTransaksiItem implements Serializable {
  	public String toString(){
 		return 
 			"LihatTransaksiItem{" + 
-			"status_update = '" + statusUpdate + '\'' + 
+			"status_update = '" + statusUpdate + '\'' +
 			",id_kategori = '" + idKategori + '\'' + 
 			",jumlah = '" + jumlah + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
-			",status_delete = '" + statusDelete + '\'' + 
-			",catatan = '" + catatan + '\'' + 
+			",status_delete = '" + statusDelete + '\'' +
+			",catatan = '" + catatan + '\'' +
 			",created_at = '" + createdAt + '\'' + 
 			",id = '" + id + '\'' + 
 			",id_user = '" + idUser + '\'' + 

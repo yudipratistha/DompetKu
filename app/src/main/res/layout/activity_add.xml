@@ -13,15 +13,15 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <android.support.v7.widget.Toolbar
-                android:theme="?actionBarTheme"
+                android:background="@color/colorPrimary"
                 android:id="@id/toolbar"
-                android:background="@color/colorAccentGreen"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?actionBarSize"
                 app:navigationIcon="@drawable/ic_clear_black_24dp"
                 app:title="Edit / Tambah Transaksi"
                 app:titleTextColor="@color/colorPrimary_light" >
+
             <!--<ImageButton-->
                 <!--android:layout_gravity="end"-->
                 <!--android:id="@+id/toolbar_wallet"-->
@@ -35,9 +35,9 @@
             </android.support.v7.widget.Toolbar>
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
-                android:background="@color/colorAccentGreen"
+                style="@style/CustomTheme"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="40dp"
                 android:layout_below="@+id/toolbar"
                 android:layout_alignParentLeft="true"
                 app:tabGravity="fill"

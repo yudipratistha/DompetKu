@@ -35,6 +35,8 @@ public class ProfileFragment extends Fragment {
     private EditText weight_input;
     private EditText height_input;
     private Button logout_button;
+    private Button aturkategori;
+    private Button aturpengingat;
 
     public ProfileFragment() {}
 
@@ -98,6 +100,15 @@ public class ProfileFragment extends Fragment {
                 Intent loginactivity = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
                 startActivity(loginactivity);
                 getActivity().finish();
+            }
+        });
+
+        aturkategori = getActivity().findViewById(R.id.btn_aturkategori);
+        aturkategori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), KategoriActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
 import com.example.yudipratistha.dompetku.model.BuatTransaksi;
 import com.example.yudipratistha.dompetku.model.LihatKategoriItem;
@@ -52,8 +53,8 @@ public class AddActivity extends AppCompatActivity {
     MenuItem save;
     MenuItem delete;
     TextView biaya;
-    String tipe;
     LihatTransaksiItem activity;
+    TabLayout tabs;
 
     APIService service;
     boolean isAdd = true;
@@ -63,14 +64,22 @@ public class AddActivity extends AppCompatActivity {
     DompetkuSqLite db;
 
     private void populateData(LihatTransaksiItem activity){
+        TabLayout tabLayout =  findViewById(R.id.tabs);
         Calendar calendar = Util.stringToCalendar(activity.getTanggal(), "yyyy-MM-dd HH:mm");
         String pattern = "dd MMMM";
         if(calendar.get(Calendar.YEAR) != Calendar.getInstance().get(Calendar.YEAR))
             pattern+=" yyyy";
 
-        LihatKategoriItem type = DompetkuSqLite.getInstance(this).getType(activity.getIdKategori());
+//        LihatKategoriItem type = DompetkuSqLite.getInstance(this).getType(activity.getIdKategori());
+        tabLayout.setScrollPosition(1, 0.0f, true);
         input_value.setText(String.valueOf(activity.getJumlah()));
         input_note.setText(activity.getCatatan());
+        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getAllType();
+        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(this, android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
+        int type_position = adapter.getPosition(type);
+        this.kategori_input.setSelection(type_position);
         icon_kategori.setImageResource(type.getIcon());
         input_date.setText(Util.calendarToString(calendar, pattern));
     }
@@ -79,11 +88,13 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        TabLayout tabLayout =  findViewById(R.id.tabs);
         biaya = findViewById(R.id.input_text);
         setupToolBar();
-                db = DompetkuSqLite.getInstance(this);
+        db = DompetkuSqLite.getInstance(this);
+        service = APIClient.getService();
 
+        //load all data from sqlite
+        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getAllType();
 
         //finding views
         input_value = findViewById(R.id.input_value);
@@ -94,97 +105,11 @@ public class AddActivity extends AppCompatActivity {
 
         //isntance Calendar
         myCalendar = Calendar.getInstance();
-        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getPengeluaranKategori("Pengeluaran");
         //spinner
-        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(getApplicationContext(), android.R.layout.simple_spinner_item, types);
+        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         kategori_input.setAdapter(adapter);
-
-        kategori_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                icon_kategori.setImageResource(types.get(i).getIcon());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                switch (tab.getPosition()){
-                    case 0:
-                        biaya.setText(R.string.minus);
-                        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getPengeluaranKategori("Pengeluaran");
-                        //spinner
-                        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(getApplicationContext(), android.R.layout.simple_spinner_item, types);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        kategori_input.setAdapter(adapter);
-
-                        kategori_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                icon_kategori.setImageResource(types.get(i).getIcon());
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-
-                            }
-                        });
-                        Toast.makeText(AddActivity.this, tipe, Toast.LENGTH_LONG).show();
-//                    case 1:
-//                        biaya.setText(R.string.plus);
-//                        Toast.makeText(AddActivity.this, "Gagal ada masalah pengisian", Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-                        biaya.setText(R.string.minus);
-                        Toast.makeText(AddActivity.this, "wee11111e", Toast.LENGTH_LONG).show();
-                        tipe = "Pengeluaran";
-
-                    case 1:
-                        biaya.setText(R.string.plus);
-                        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getPengeluaranKategori("Pemasukan");
-                        //spinner
-                        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(getApplicationContext(), android.R.layout.simple_spinner_item, types);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        kategori_input.setAdapter(adapter);
-
-                        kategori_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                icon_kategori.setImageResource(types.get(i).getIcon());
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-
-                            }
-                        });
-
-                }
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-
-        });
-
-        //load all data from sqlite
-//        Toast.makeText(AddActivity.this, tipe, Toast.LENGTH_LONG).show();
-
+        tabKat();
 
         activity = new LihatTransaksiItem();
         try {
@@ -198,9 +123,9 @@ public class AddActivity extends AppCompatActivity {
         }
 
         if(isAdd){
-            setTitle("Add Activity");
+            getSupportActionBar().setTitle(R.string.tambahTransaksi);
         } else {
-            setTitle("Edit Activity");
+            getSupportActionBar().setTitle(R.string.editTransaksi);
             myCalendar = Util.stringToCalendar(activity.getTanggal(),"yyyy-MM-dd");
             LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
 
@@ -236,6 +161,75 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void tabKat(){
+        TabLayout tabLayout =  findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Log.d("select tab", String.valueOf(position));
+                switch (tab.getPosition()){
+                    case 0:
+                        Log.d("tab", "1");
+                        biaya.setText(R.string.minus);
+                        tipe("Pengeluaran");
+                        break;
+                    case 1:
+                        biaya.setText(R.string.plus);
+                        tipe("Pemasukan");
+                        break;
+                }
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                Log.i("TAG", "onTabUnselected: " + tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                Log.i("TAG", "onTabReselected: " + tab.getPosition());
+                switch (tab.getPosition()){
+                    case 0:
+                        biaya.setText(R.string.minus);
+                        Toast.makeText(AddActivity.this, "wee11111e", Toast.LENGTH_LONG).show();
+                        tipe("Pengeluaran");
+                        break;
+                    case 1:
+                        biaya.setText(R.string.plus);
+                        Log.d("tab", "2");
+                        tipe("Pemasukan");
+                        break;
+                }
+            }
+
+        });
+    }
+
+    private void tipe(String tipe){
+        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getPengeluaranKategori(tipe);
+        //spinner
+        ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(getApplicationContext(), android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        kategori_input.setAdapter(adapter);
+
+        kategori_input.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                icon_kategori.setImageResource(types.get(i).getIcon());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        Toast.makeText(AddActivity.this, tipe, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -278,10 +272,9 @@ public class AddActivity extends AppCompatActivity {
                 activity.setCreatedAt(now.toString());
                 activity.setStatusSync(1);
                 if(isAdd) {
-
-                    DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksi(activity);
-
+                    insertTrans();
                 } else {
+                    updateTrans();
                     if(isUpdate) activity.setStatusUpdate(1);
                     else activity.setStatusUpdate(0);
                     DompetkuSqLite.getInstance(this).editTransaksi(activity);
@@ -313,8 +306,7 @@ public class AddActivity extends AppCompatActivity {
 
     private void insertTrans() {
         isInsert = false;
-        service.buatTransaksi(activity.getIdUser(), activity.getJumlah(), activity.getCatatan(),
-                activity.getIdKategori(), activity.getTanggal())
+        service.buatTransaksi( activity.getIdUser(), activity.getIdKategori(), activity.getTanggal(), activity.getCatatan(), activity.getJumlah())
                 .enqueue(new Callback<BuatTransaksi>() {
                     @Override
                     public void onResponse(Call<BuatTransaksi> call, Response<BuatTransaksi> response) {

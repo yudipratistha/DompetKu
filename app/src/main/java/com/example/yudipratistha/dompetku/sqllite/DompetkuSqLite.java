@@ -190,9 +190,9 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
         int total= 0;
         String qry = "SELECT ifnull\n" +
                 "        ((SELECT SUM(jumlah) FROM transaksis INNER JOIN kategoris on kategoris._id = transaksis.id_kategori\n" +
-                "        WHERE tipe = "+"'Pengeluaran'"+" AND tanggal >='"+ date +"' and tanggal <='"+ date2 +"'),0) - \n" +
+                "        WHERE tipe = "+"'Pemasukan'"+" AND tanggal >='"+ date +"' and tanggal <='"+ date2 +"'),0) - \n" +
                 "        ifnull((SELECT SUM(jumlah) FROM transaksis INNER JOIN kategoris on kategoris._id = transaksis.`id_kategori`\n" +
-                "        WHERE tipe = "+"'Pemasukan'"+" AND tanggal >='"+ date +"' and tanggal <='"+ date2 +"'),0) as total\n" +
+                "        WHERE tipe = "+"'Pengeluaran'"+" AND tanggal >='"+ date +"' and tanggal <='"+ date2 +"'),0) as total\n" +
                 "        FROM transaksis where tanggal >='"+ date +"' AND tanggal <='"+ date2 +"' group by total";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(qry, null);
@@ -243,6 +243,8 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
         values.put(TransaksiContract.COLUMN_CATATAN, transaksi.getCatatan());
         values.put(TransaksiContract.COLUMN_JUMLAH, transaksi.getJumlah());
         values.put(TransaksiContract.COLUMN_STATUS_SYNC, 0);
+        values.put(TransaksiContract.COLUMN_STATUS_UPDATE, transaksi.getStatusUpdate());
+        values.put(TransaksiContract.COLUMN_STATUS_DELETE, transaksi.getStatusDelete());
         values.put(TransaksiContract.COLUMN_CREATED_AT, transaksi.getCreatedAt());
         values.put(TransaksiContract.COLUMN_UPDATED_AT, transaksi.getUpdatedAt());
 

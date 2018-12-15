@@ -140,7 +140,6 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.View
             balance_notes = itemView.findViewById(R.id.balance_notes);
 //            has_image = itemView.findViewById(R.id.has_image);
             header = itemView.findViewById(R.id.header);
-
             itemView.setOnClickListener(this);
         }
 

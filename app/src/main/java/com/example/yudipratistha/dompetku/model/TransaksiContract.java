@@ -21,7 +21,7 @@ public class TransaksiContract implements BaseColumns {
                     TransaksiContract.COLUMN_ID_USER + " INTEGER," +
                     TransaksiContract.COLUMN_ID_KATEGORI + " INTEGER," +
                     TransaksiContract.COLUMN_TANGGAL + " TEXT," +
-                    TransaksiContract.COLUMN_CATATAN + " TEXT," +
+                    TransaksiContract.COLUMN_CATATAN + " TEXT DEFAULT '-'," +
                     TransaksiContract.COLUMN_JUMLAH + " TEXT," +
                     TransaksiContract.COLUMN_STATUS_SYNC + " INTEGER," +
                     TransaksiContract.COLUMN_STATUS_UPDATE + " INTEGER," +

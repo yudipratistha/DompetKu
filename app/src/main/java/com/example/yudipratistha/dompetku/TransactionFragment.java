@@ -126,15 +126,7 @@ public class TransactionFragment extends Fragment {
         text_pendapatan_total = getActivity().findViewById(R.id.text_pendapatan_total);
         text_jumlah_total = getActivity().findViewById(R.id.text_jumlah_total);
 
-        String saldo = "Saldo (" + month +")";
-        int total_saldo = DompetkuSqLite.getInstance(getContext()).getTransaksiTotal(month_string);
-        String totalSaldo = "Rp. " + String.valueOf(total_saldo);
-        int total_peng = DompetkuSqLite.getInstance(getContext()).getTransaksiMonthPeng(month_string);
-        String total_pengeluaran= "Rp. " + String.valueOf(total_peng);
-        int total_pem = DompetkuSqLite.getInstance(getContext()).getTransaksiMonthPem(month_string);
-        String total_pemasukan = "Rp. " + String.valueOf(total_pem);
-        int arus_kas = total_pem - total_peng;
-        String kas_bulan = "Rp. " + String.valueOf(arus_kas);
+
 
         title.setText(month);
         monthPrev = getActivity().findViewById(R.id.imageButton_prev);
@@ -168,16 +160,6 @@ public class TransactionFragment extends Fragment {
             }
         });
 
-//        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getTransaksiMonth(month_string);
-
-        text_account.setText(saldo);
-        text_amount_account.setText(totalSaldo);
-        text_pengeluaran_total.setText(total_pengeluaran);
-        text_pendapatan_total.setText(total_pemasukan);
-        text_jumlah_total.setText(kas_bulan);
-
-
-//        transaksi_list = getActivity().findViewById(R.id.transaksi_list);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,6 +172,31 @@ public class TransactionFragment extends Fragment {
     }
 
     private void initData(){
+        int total_saldo = DompetkuSqLite.getInstance(getContext()).getTransaksiTotal(month_string);
+        int total_peng = DompetkuSqLite.getInstance(getContext()).getTransaksiMonthPeng(month_string);
+        int total_pem = DompetkuSqLite.getInstance(getContext()).getTransaksiMonthPem(month_string);
+        int arus_kas = total_pem - total_peng;
+        if (arus_kas > 0 ){
+            text_jumlah_total.setTextColor(getResources().getColor(R.color.colorAccentBlue));
+        }else if (arus_kas < 0){
+            text_jumlah_total.setTextColor(getResources().getColor(R.color.colorAccentRed));
+        }
+        if (total_saldo > 0 ){
+            text_amount_account.setTextColor(getResources().getColor(R.color.colorAccentBlue));
+        }else if (total_saldo < 0){
+            text_amount_account.setTextColor(getResources().getColor(R.color.colorAccentRed));
+        }
+        String saldo = "Saldo (" + month +")";
+        String totalSaldo = "Rp. " + String.valueOf(total_saldo);
+        String total_pengeluaran= "Rp. " + String.valueOf(total_peng);
+        String total_pemasukan = "Rp. " + String.valueOf(total_pem);
+        String kas_bulan = "Rp. " + String.valueOf(arus_kas);
+        text_account.setText(saldo);
+        text_amount_account.setText(totalSaldo);
+        text_pengeluaran_total.setText(total_pengeluaran);
+        text_pendapatan_total.setText(total_pemasukan);
+        text_jumlah_total.setText(kas_bulan);
+
         lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getTransaksiMonth(month_string);
         transaksi_list = getActivity().findViewById(R.id.transaksi_list);
         adapter = new TransaksiAdapter(getActivity(), lihatTransaksiItems);

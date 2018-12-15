@@ -33,17 +33,14 @@ public interface APIService {
     @FormUrlEncoded
     @POST("buat_transaksi")
     Call<BuatTransaksi> buatTransaksi(@Field("id_user") int id_user,
-                                      @Field("jumlah") int jumlah,
-                                      @Field("catatan") String catatan,
                                       @Field("id_kategori") int id_kategori,
-                                      @Field("tanggal") String tanggal
-//                                      @Field("status_update") int status_update,
-//                                      @Field("status_delete") int status_delete
+                                      @Field("tanggal") String tanggal,
+                                      @Field("catatan") String catatan,
+                                      @Field("jumlah") int jumlah
 
+    );
 
-);
-
-    @GET("lihat_transaksi/{id")
+    @GET("lihat_transaksi/{id}")
     Call<LihatTransaksi>  lihatTransaksi(@Path("id") int id_user);
 
     @FormUrlEncoded
