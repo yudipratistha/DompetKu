@@ -23,6 +23,10 @@
         <activity android:name=".SignupActivity" android:theme="@style/CustomTheme.NoActionBar"/>
         <activity android:name=".LoginActivity" android:theme="@style/CustomTheme.NoActionBar"/>
         <activity android:name=".AddActivity" android:theme="@style/CustomTheme.NoActionBar"/>
+        <activity android:name=".PengingatActivity" android:theme="@style/CustomTheme"/>
+        <activity android:name=".KategoriActivity" android:theme="@style/CustomTheme"/>
+        <activity android:name=".AddKategoriActivity" android:theme="@style/CustomTheme.NoActionBar"/>
+
     </application>
 
 

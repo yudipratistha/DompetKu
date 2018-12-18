@@ -79,11 +79,11 @@ public class ProfileFragment extends Fragment {
 
         //Glide.with(this).load(R.drawable.profile).into(profile_pict);
 
-        name_input.setOnFocusChangeListener(new FocusChangeListener());
+//        name_input.setOnFocusChangeListener(new FocusChangeListener());
 //        move_minute_input.setOnFocusChangeListener(new FocusChangeListener());
 //        move_distance_input.setOnFocusChangeListener(new FocusChangeListener());
-        gender_input.setOnFocusChangeListener(new FocusChangeListener());
-        birthday_input.setOnFocusChangeListener(new FocusChangeListener());
+//        gender_input.setOnFocusChangeListener(new FocusChangeListener());
+//        birthday_input.setOnFocusChangeListener(new FocusChangeListener());
 //        weight_input.setOnFocusChangeListener(new FocusChangeListener());
 //        height_input.setOnFocusChangeListener(new FocusChangeListener());
 
@@ -111,6 +111,14 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        aturpengingat = getActivity().findViewById(R.id.btn_aturpengingat);
+        aturpengingat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PengingatActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void populateData(DataPengguna profile){
@@ -128,36 +136,36 @@ public class ProfileFragment extends Fragment {
 //        }
     }
 
-    class FocusChangeListener implements View.OnFocusChangeListener{
-        @Override
-        public void onFocusChange(View view, boolean b) {
-            if(!b) {
-                boolean changed = false;
-                if(!name_input.getText().toString().equals("")) {
-                    if (Integer.parseInt(name_input.getText().toString()) != profile.getId()) {
-                        profile.setId(Integer.parseInt(name_input.getText().toString()));
-                        changed = true;
-                    }
-                }
-                if(!move_minute_input.getText().toString().equals(profile.getName())) {
-                    profile.setName(move_minute_input.getText().toString());
-                    changed=true;
-                }
-                if(!move_distance_input.getText().toString().equals(profile.getEmail())) {
-                    profile.setEmail(move_distance_input.getText().toString());
-                    changed=true;
-                }
-
-                if(!gender_input.getText().toString().equals(profile.getCreatedAt())) {
-                    profile.setCreatedAt(gender_input.getText().toString());
-                    changed=true;
-                }
-
-                if(changed) {
-                    //TriathlogDbHelper.getInstance(getActivity()).editProfile(profile);
-                }
-            }
-        }
-    }
+//    class FocusChangeListener implements View.OnFocusChangeListener{
+//        @Override
+//        public void onFocusChange(View view, boolean b) {
+//            if(!b) {
+//                boolean changed = false;
+//                if(!name_input.getText().toString().equals("")) {
+//                    if (Integer.parseInt(name_input.getText().toString()) != profile.getId()) {
+//                        profile.setId(Integer.parseInt(name_input.getText().toString()));
+//                        changed = true;
+//                    }
+//                }
+//                if(!move_minute_input.getText().toString().equals(profile.getName())) {
+//                    profile.setName(move_minute_input.getText().toString());
+//                    changed=true;
+//                }
+//                if(!move_distance_input.getText().toString().equals(profile.getEmail())) {
+//                    profile.setEmail(move_distance_input.getText().toString());
+//                    changed=true;
+//                }
+//
+//                if(!gender_input.getText().toString().equals(profile.getCreatedAt())) {
+//                    profile.setCreatedAt(gender_input.getText().toString());
+//                    changed=true;
+//                }
+//
+//                if(changed) {
+//                    //TriathlogDbHelper.getInstance(getActivity()).editProfile(profile);
+//                }
+//            }
+//        }
+//    }
 
 }

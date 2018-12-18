@@ -145,14 +145,15 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
 
     public List<LihatTransaksiItem> getHistoriTransaksi(String filterStartStr, String filterEndStr, String tipe){
         List<LihatTransaksiItem> transaksis = new ArrayList<>();
-        String qry = "SELECT * FROM transaksis inner join kategoris on kategoris._id = transaksis.`id_kategori`" +
-                " WHERE tanggal >= '"+ filterStartStr +"' and tanggal <= '"+ filterEndStr +"'  and tipe='"+ tipe +"' ORDER BY tanggal DESC";
+        String qry = "SELECT transaksis._id, transaksis.id_user, id_kategori, tanggal, catatan, jumlah, transaksis.status_update, kategoris.status_delete, transaksis.status_sync, " +
+                "            transaksis.created_at, transaksis.updated_at, nama_kategori, icon, tipe" +
+                "     FROM transaksis inner join kategoris on kategoris._id = transaksis.id_kategori\n" +
+                "                WHERE tanggal>= '"+ filterStartStr +"' and tanggal<= '"+ filterEndStr +"' and tipe= '"+ tipe +"' ORDER BY tanggal DESC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(qry, null);
         if (cursor.moveToFirst()) {
             do {
                 LihatTransaksiItem transaksi = new LihatTransaksiItem();
-
                 transaksi.setId(cursor.getInt(cursor.getColumnIndex(TransaksiContract._ID)));
                 transaksi.setIdUser(cursor.getInt(cursor.getColumnIndex(TransaksiContract.COLUMN_ID_USER)));
                 transaksi.setIdKategori(cursor.getInt(cursor.getColumnIndex(TransaksiContract.COLUMN_ID_KATEGORI)));
@@ -418,8 +419,11 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
     public void insertKategoris(int idUser){
         SQLiteDatabase db = this.getWritableDatabase();
         List<String> type_names = Arrays.asList("Belanja","Makanan & Minuman","Gaji");
-        List<Integer> type_icons = Arrays.asList(R.drawable.ic_cat_local_grocery_store_black_24dp,R.drawable.ic_cat_local_dining_black_24dp,R.drawable.ic_cat_work_black_24dp);
-        List<String> type_expense = Arrays.asList("Pengeluaran","Pengeluaran","Pemasukan");
+        List<Integer> type_icons = Arrays.asList(R.drawable.ic_cat_local_grocery_store_black_24dp, R.drawable.ic_cat_local_dining_black_24dp, R.drawable.ic_cat_event_available_black_24dp,
+                R.drawable.ic_cat_directions_bus_black_24dp, R.drawable.ic_cat_card_giftcard_black_24dp, R.drawable.ic_cat_school_black_24dp, R.drawable.ic_cat_local_hospital_black_24dp, R.drawable.ic_cat_local_florist_black_24dp,
+                R.drawable.ic_cat_work_black_24dp, R.drawable.ic_cat_card_giftcard_black_24dp, R.drawable.ic_cat_thumb_up_black_24dp, R.drawable.ic_cat_local_florist_black_24dp);
+        List<String> type_expense = Arrays.asList("Pengeluaran","Pengeluaran", "Pengeluaran","Pengeluaran", "Pengeluaran","Pengeluaran", "Pengeluaran","Pengeluaran",
+                "Pemasukan", "Pemasukan", "Pemasukan", "Pemasukan");
 
         for (int i = 0; i < type_names.size(); i++){
             ContentValues values = new ContentValues();

@@ -14,4 +14,6 @@
     <string name="action_settings">Setting</string>
     <string name="tambahTransaksi">Tambah Transaksi</string>
     <string name="editTransaksi">Edit Transaksi</string>
+    <string name="pengingat">Pengingat</string>
+    <string name="kategori">Kategori</string>
 </resources>

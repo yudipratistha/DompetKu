@@ -104,4 +104,15 @@ public class LihatKategoriItem{
 		return
 				this.getNamaKategori();
 		}
+
+	@Override
+	public boolean equals (Object obj)
+	{
+		if (this==obj) return true;
+		if (obj == null) return false;
+		if (this.getClass() != obj.getClass()) return false;
+
+		LihatKategoriItem type = (LihatKategoriItem) obj ;
+		return this.id == type.getId();
+	}
 }

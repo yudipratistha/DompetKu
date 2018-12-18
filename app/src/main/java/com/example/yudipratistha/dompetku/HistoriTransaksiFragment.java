@@ -14,15 +14,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.yudipratistha.dompetku.adapter.HistoriTransaksiAdapter;
 import com.example.yudipratistha.dompetku.adapter.TransaksiAdapter;
-import com.example.yudipratistha.dompetku.model.DataPengguna;
 import com.example.yudipratistha.dompetku.model.LihatTransaksiItem;
 import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
 import com.example.yudipratistha.dompetku.util.Util;
@@ -32,7 +35,6 @@ import java.util.Date;
 import java.util.List;
 
 public class HistoriTransaksiFragment extends Fragment {
-    private DataPengguna profile;
     private RecyclerView transaksi_list;
     Calendar myCalendar;
     Calendar myCalendar2;
@@ -40,9 +42,16 @@ public class HistoriTransaksiFragment extends Fragment {
     private Button filterend;
     private String filterStartStr;
     private String filterEndStr;
-    private String tipeTrans;
-    private HistoriTransaksiAdapter adapter;
-    private List<LihatTransaksiItem> lihatTransaksiItems;
+    public HistoriTransaksiAdapter adapter;
+    public List<LihatTransaksiItem> lihatTransaksiItems;
+    EditText input_value;
+    EditText input_note;
+    ImageView icon_kategori;
+    Spinner kategori_input;
+    EditText input_date;
+    MenuItem delete;
+    LihatTransaksiItem activity;
+
 
 
     public HistoriTransaksiFragment() {}
@@ -93,8 +102,9 @@ public class HistoriTransaksiFragment extends Fragment {
         filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
         filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
         filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
+        Log.d("start", filterStartStr);
+        Log.d("end", filterEndStr);
         historiTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
-        tipeTrans= "Pengeluaran";
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -102,42 +112,29 @@ public class HistoriTransaksiFragment extends Fragment {
 
                 switch (tab.getPosition()){
                     case 0:
-                        myCalendar = Calendar.getInstance();
-                        myCalendar.add(Calendar.DATE, -7);
-                        myCalendar2 = Calendar.getInstance();
-                        filterstart = getActivity().findViewById(R.id.btn_date_start);
-                        filterend = getActivity().findViewById(R.id.btn_date_end);
-                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                        tipeTrans= "Pengeluaran";
-                        historiTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+                        histTrans("Pengeluaran");
+                        break;
+                    case 1:
+                        histTrans("Pemasukan");
+                        break;
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
 
-                    case 1:
-                        myCalendar = Calendar.getInstance();
-                        myCalendar.add(Calendar.DATE, -7);
-                        myCalendar2 = Calendar.getInstance();
-                        filterstart = getActivity().findViewById(R.id.btn_date_start);
-                        filterend = getActivity().findViewById(R.id.btn_date_end);
-                        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
-                        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
-                        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
-                        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
-                        tipeTrans= "Pemasukan";
-                        historiTransaksi(filterStartStr, filterEndStr, "Pemasukan");
-                }
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        histTrans("Pengeluaran");
+                        break;
+                    case 1:
+                        histTrans("Pemasukan");
+                        break;
+                }
             }
 
         });
@@ -148,6 +145,7 @@ public class HistoriTransaksiFragment extends Fragment {
         adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
         transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         transaksi_list.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         //display datepicker
         filterstart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +164,7 @@ public class HistoriTransaksiFragment extends Fragment {
                                 adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
                                 transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                                 transaksi_list.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
                             }
                         },
                         myCalendar.get(Calendar.YEAR),
@@ -196,6 +195,7 @@ public class HistoriTransaksiFragment extends Fragment {
                                 adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
                                 transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                                 transaksi_list.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
                             }
                         },
                         myCalendar2.get(Calendar.YEAR),
@@ -209,22 +209,61 @@ public class HistoriTransaksiFragment extends Fragment {
         });
     }
 
-//    private void initData(){
-//        lihatTransaksiItems = DompetkuSqLite.getInstance(getActivity()).getHistoriTransaksi(historiTransaksi;);
-//        transaksi_list = getActivity().findViewById(R.id.transaksi_list);
-//        adapter = new HistoriTransaksiAdapter(getActivity(), lihatTransaksiItems);
-//        transaksi_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        transaksi_list.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
-//    }
+    private void histTrans(String tipe){
+        myCalendar = Calendar.getInstance();
+        myCalendar.add(Calendar.DATE, -7);
+        myCalendar2 = Calendar.getInstance();
+        filterstart = getActivity().findViewById(R.id.btn_date_start);
+        filterend = getActivity().findViewById(R.id.btn_date_end);
+        filterstart.setText(Util.calendarToString(myCalendar, "MMMM dd, yyyy"));
+        filterStartStr = Util.calendarToString(myCalendar, "yyyy-MM-dd");
+        filterend.setText(Util.calendarToString(myCalendar2, "MMMM dd, yyyy"));
+        filterEndStr = Util.calendarToString(myCalendar2, "yyyy-MM-dd");
+        historiTransaksi(filterStartStr, filterEndStr, tipe);
+    }
+
+    private void initData(){
+        TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
+        historiTransaksi(filterStartStr, filterEndStr, "Pengeluaran");
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        histTrans("Pengeluaran");
+                        break;
+                    case 1:
+                        histTrans("Pemasukan");
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        histTrans("Pengeluaran");
+                        break;
+                    case 1:
+                        histTrans("Pemasukan");
+                        break;
+                }
+            }
+
+        });
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-//        initData();
+        initData();
     }
-
-
 
 }
 

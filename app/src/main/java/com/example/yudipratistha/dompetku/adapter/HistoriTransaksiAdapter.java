@@ -28,6 +28,8 @@ import java.util.List;
 public class HistoriTransaksiAdapter extends RecyclerView.Adapter<HistoriTransaksiAdapter.ViewHolder> {
     Context context;
     List<LihatTransaksiItem> activities;
+    private final int REQUEST_UPDATE = 1;
+
 
     public HistoriTransaksiAdapter(Context context, List<LihatTransaksiItem> activities) {
         this.context = context;
@@ -138,7 +140,6 @@ public class HistoriTransaksiAdapter extends RecyclerView.Adapter<HistoriTransak
             balance_notes = itemView.findViewById(R.id.balance_notes);
 //            has_image = itemView.findViewById(R.id.has_image);
             header = itemView.findViewById(R.id.header);
-
             itemView.setOnClickListener(this);
         }
 

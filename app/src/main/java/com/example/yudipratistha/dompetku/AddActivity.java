@@ -45,7 +45,6 @@ import retrofit2.Response;
 public class AddActivity extends AppCompatActivity {
     EditText input_value;
     EditText input_note;
-    Button input_category;
     ImageView icon_kategori;
     Spinner kategori_input;
     EditText input_date;
@@ -65,21 +64,25 @@ public class AddActivity extends AppCompatActivity {
 
     private void populateData(LihatTransaksiItem activity){
         TabLayout tabLayout =  findViewById(R.id.tabs);
-        Calendar calendar = Util.stringToCalendar(activity.getTanggal(), "yyyy-MM-dd HH:mm");
+        Calendar calendar = Util.stringToCalendar(activity.getTanggal(), "yyyy-MM-dd");
         String pattern = "dd MMMM";
         if(calendar.get(Calendar.YEAR) != Calendar.getInstance().get(Calendar.YEAR))
             pattern+=" yyyy";
+        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getAllType();
+        LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
+        if (type.getTipe().equals("Pengeluaran")){
+            tabLayout.setScrollPosition(0, 0.0f, true);
+        }else if (type.getTipe().equals("Pemasukan")){
+            tabLayout.setScrollPosition(1, 0.0f, true);
+        }
 
-//        LihatKategoriItem type = DompetkuSqLite.getInstance(this).getType(activity.getIdKategori());
-        tabLayout.setScrollPosition(1, 0.0f, true);
         input_value.setText(String.valueOf(activity.getJumlah()));
         input_note.setText(activity.getCatatan());
-        final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getAllType();
         ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
         int type_position = adapter.getPosition(type);
         this.kategori_input.setSelection(type_position);
+        Log.d("kategori", type.getTipe());
         icon_kategori.setImageResource(type.getIcon());
         input_date.setText(Util.calendarToString(calendar, pattern));
     }
@@ -128,9 +131,10 @@ public class AddActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.editTransaksi);
             myCalendar = Util.stringToCalendar(activity.getTanggal(),"yyyy-MM-dd");
             LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
-
+            Log.d("spinner", String.valueOf(type));
             int type_position = adapter.getPosition(type);
-            this.kategori_input.setSelection(type_position);
+            Log.e("spinner", String.valueOf(type_position));
+            kategori_input.setSelection(3);
 
             populateData(activity);
         }
@@ -277,6 +281,8 @@ public class AddActivity extends AppCompatActivity {
                     updateTrans();
                     if(isUpdate) activity.setStatusUpdate(1);
                     else activity.setStatusUpdate(0);
+                    Log.e("transaksi", "aeaweawewea");
+                    Log.e("transaksi", String.valueOf(activity));
                     DompetkuSqLite.getInstance(this).editTransaksi(activity);
                     Intent add_activity = new Intent(getApplicationContext(), AddActivity.class);
                     Bundle bundle = new Bundle();
@@ -289,8 +295,8 @@ public class AddActivity extends AppCompatActivity {
 
             case R.id.action_delete:
                 new AlertDialog.Builder(this)
-                        .setTitle("Delete Activity")
-                        .setMessage("Do you really want to delete this activity?")
+                        .setTitle("Hapus Transaksi")
+                        .setMessage("Apakah kamu benar akan menghapus transaksi ini?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 DompetkuSqLite.getInstance(getApplicationContext()).deleteTransaksi(activity);
@@ -323,6 +329,7 @@ public class AddActivity extends AppCompatActivity {
                         Toast.makeText(AddActivity.this, "laravel no", Toast.LENGTH_LONG).show();
                     }
                 });
+        Log.d("isInsert", String.valueOf(isInsert));
         if (isInsert) activity.setStatusSync(1);
         else activity.setStatusSync(0);
         activity.setStatusUpdate(1);
