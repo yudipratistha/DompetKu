@@ -3,10 +3,12 @@ package com.example.yudipratistha.dompetku.API;
 
 import com.example.yudipratistha.dompetku.model.BuatTransaksi;
 import com.example.yudipratistha.dompetku.model.DeleteTransaksi;
+import com.example.yudipratistha.dompetku.model.LihatKategori;
 import com.example.yudipratistha.dompetku.model.LihatTransaksi;
 import com.example.yudipratistha.dompetku.model.Signup;
 import com.example.yudipratistha.dompetku.model.UpdateTransaksi;
 import com.example.yudipratistha.dompetku.model.UserLogin;
+import com.example.yudipratistha.dompetku.model.UserUpdate;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -31,6 +33,12 @@ public interface APIService {
     );
 
     @FormUrlEncoded
+    @POST("update_user/{id}")
+    Call<UserUpdate> updateUser(@Path("id") int id_user,
+                                @Field("name") String nama
+    );
+
+    @FormUrlEncoded
     @POST("buat_transaksi")
     Call<BuatTransaksi> buatTransaksi(@Field("id_user") int id_user,
                                       @Field("id_kategori") int id_kategori,
@@ -45,7 +53,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("update_transaksi/{id}")
-    Call<UpdateTransaksi> updateTransaksi(@Field("id") int id_transaksi,
+    Call<UpdateTransaksi> updateTransaksi(@Path("id") int id_transaksi,
                                           @Field("jumlah") int jumlah,
                                           @Field("id_kategori") int id_kategori,
                                           @Field("tanggal") String tanggal,
@@ -54,4 +62,28 @@ public interface APIService {
 
     @DELETE("delete_transaksi/{id}")
     Call<DeleteTransaksi> deleteTransaksi(@Path("id") int id_transaksi);
+
+    @FormUrlEncoded
+    @POST("buat_kategori")
+    Call<BuatTransaksi> buatKategori(@Field("id_user") int id_user,
+                                     @Field("nama_kategori") String id_kategori,
+                                     @Field("icon") int icon,
+                                     @Field("tipe") String tipe
+
+    );
+
+    @GET("lihat_kategori")
+    Call<LihatKategori>  lihatKategori();
+
+    @FormUrlEncoded
+    @POST("update_transaksi/{id}")
+    Call<UpdateTransaksi> updateKategori(@Path("id") int id_transaksi,
+                                         @Field("jumlah") int jumlah,
+                                         @Field("id_kategori") int id_kategori,
+                                         @Field("tanggal") String tanggal,
+                                         @Field("catatan") String catatan
+    );
+
+    @DELETE("delete_transaksi/{id}")
+    Call<DeleteTransaksi> deleteKategori(@Path("id") int id_transaksi);
 }

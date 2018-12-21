@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
 import com.example.yudipratistha.dompetku.model.BuatTransaksi;
+import com.example.yudipratistha.dompetku.model.DeleteTransaksi;
 import com.example.yudipratistha.dompetku.model.LihatKategoriItem;
 import com.example.yudipratistha.dompetku.model.LihatTransaksiItem;
 import com.example.yudipratistha.dompetku.model.UpdateTransaksi;
@@ -52,7 +53,7 @@ public class AddActivity extends AppCompatActivity {
     MenuItem save;
     MenuItem delete;
     TextView biaya;
-    LihatTransaksiItem activity;
+    LihatTransaksiItem transaksi;
     TabLayout tabs;
 
     APIService service;
@@ -62,22 +63,24 @@ public class AddActivity extends AppCompatActivity {
 
     DompetkuSqLite db;
 
-    private void populateData(LihatTransaksiItem activity){
+    private void populateData(LihatTransaksiItem transaksi){
         TabLayout tabLayout =  findViewById(R.id.tabs);
-        Calendar calendar = Util.stringToCalendar(activity.getTanggal(), "yyyy-MM-dd");
+        Calendar calendar = Util.stringToCalendar(transaksi.getTanggal(), "yyyy-MM-dd");
         String pattern = "dd MMMM";
         if(calendar.get(Calendar.YEAR) != Calendar.getInstance().get(Calendar.YEAR))
             pattern+=" yyyy";
         final List<LihatKategoriItem> types = db.getInstance(getApplicationContext()).getAllType();
-        LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
+        LihatKategoriItem type = db.getInstance(this).getType(transaksi.getIdKategori());
         if (type.getTipe().equals("Pengeluaran")){
+            biaya.setText("-");
             tabLayout.setScrollPosition(0, 0.0f, true);
         }else if (type.getTipe().equals("Pemasukan")){
+            biaya.setText("+");
             tabLayout.setScrollPosition(1, 0.0f, true);
         }
 
-        input_value.setText(String.valueOf(activity.getJumlah()));
-        input_note.setText(activity.getCatatan());
+        input_value.setText(String.valueOf(transaksi.getJumlah()));
+        input_note.setText(transaksi.getCatatan());
         ArrayAdapter<LihatKategoriItem> adapter = new ArrayAdapter<LihatKategoriItem>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         int type_position = adapter.getPosition(type);
@@ -114,12 +117,11 @@ public class AddActivity extends AppCompatActivity {
         kategori_input.setAdapter(adapter);
         tabKat();
 
-        activity = new LihatTransaksiItem();
+        transaksi = new LihatTransaksiItem();
         try {
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            activity = (LihatTransaksiItem) bundle.getSerializable("Transaksi");
-            Log.d("weee", String.valueOf(activity));
+            transaksi = (LihatTransaksiItem) bundle.getSerializable("Transaksi");
             isAdd = false;
         } catch (Exception e){
 
@@ -129,14 +131,14 @@ public class AddActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.tambahTransaksi);
         } else {
             getSupportActionBar().setTitle(R.string.editTransaksi);
-            myCalendar = Util.stringToCalendar(activity.getTanggal(),"yyyy-MM-dd");
-            LihatKategoriItem type = db.getInstance(this).getType(activity.getIdKategori());
+            myCalendar = Util.stringToCalendar(transaksi.getTanggal(),"yyyy-MM-dd");
+            LihatKategoriItem type = db.getInstance(this).getType(transaksi.getIdKategori());
             Log.d("spinner", String.valueOf(type));
             int type_position = adapter.getPosition(type);
             Log.e("spinner", String.valueOf(type_position));
             kategori_input.setSelection(3);
 
-            populateData(activity);
+            populateData(transaksi);
         }
 
         input_date.setText(Util.calendarToStringFriendly(myCalendar, "yyyy-MM-dd"));
@@ -201,7 +203,6 @@ public class AddActivity extends AppCompatActivity {
                 switch (tab.getPosition()){
                     case 0:
                         biaya.setText(R.string.minus);
-                        Toast.makeText(AddActivity.this, "wee11111e", Toast.LENGTH_LONG).show();
                         tipe("Pengeluaran");
                         break;
                     case 1:
@@ -233,7 +234,6 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
-        Toast.makeText(AddActivity.this, tipe, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -265,28 +265,29 @@ public class AddActivity extends AppCompatActivity {
                 LihatKategoriItem selectedType = (LihatKategoriItem) kategori_input.getSelectedItem();
                 SharedPreferences sharedPreferences = getSharedPreferences("dataPengguna", MODE_PRIVATE);
                 int id_user = sharedPreferences.getInt("id",0);
-                activity.setIdUser(id_user);
-                activity.setIdKategori(selectedType.getId());
-                activity.setTanggal(Util.calendarToString(myCalendar, "yyyy-MM-dd"));
-                activity.setCatatan(input_note.getText().toString());
-                activity.setJumlah(Integer.parseInt(input_value.getText().toString()));
+                transaksi.setIdUser(id_user);
+                transaksi.setIdKategori(selectedType.getId());
+                transaksi.setTanggal(Util.calendarToString(myCalendar, "yyyy-MM-dd"));
+                if (input_note.getText().toString().equals("")){
+                    transaksi.setCatatan("-");
+                }else {
+                    transaksi.setCatatan(input_note.getText().toString());
+                }
+                transaksi.setJumlah(Integer.parseInt(input_value.getText().toString()));
 
                 Date now = Calendar.getInstance().getTime();
-                activity.setUpdatedAt(now.toString());
-                activity.setCreatedAt(now.toString());
-                activity.setStatusSync(1);
+                transaksi.setUpdatedAt(now.toString());
+                transaksi.setCreatedAt(now.toString());
+                transaksi.setStatusSync(1);
                 if(isAdd) {
                     insertTrans();
                 } else {
                     updateTrans();
-                    if(isUpdate) activity.setStatusUpdate(1);
-                    else activity.setStatusUpdate(0);
-                    Log.e("transaksi", "aeaweawewea");
-                    Log.e("transaksi", String.valueOf(activity));
-                    DompetkuSqLite.getInstance(this).editTransaksi(activity);
+                    if(isUpdate) transaksi.setStatusUpdate(1);
+                    else transaksi.setStatusUpdate(0);
                     Intent add_activity = new Intent(getApplicationContext(), AddActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("Transaksi", activity);
+                    bundle.putSerializable("Transaksi", transaksi);
                     add_activity.putExtras(bundle);
                     setResult(RESULT_OK, add_activity);
                 }
@@ -299,7 +300,8 @@ public class AddActivity extends AppCompatActivity {
                         .setMessage("Apakah kamu benar akan menghapus transaksi ini?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                DompetkuSqLite.getInstance(getApplicationContext()).deleteTransaksi(activity);
+                                deleteTrans();
+                                Toast.makeText(getApplicationContext(), "Hapus data transaksi sukses", Toast.LENGTH_LONG).show();
                                 finish();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
@@ -312,56 +314,82 @@ public class AddActivity extends AppCompatActivity {
 
     private void insertTrans() {
         isInsert = false;
-        service.buatTransaksi( activity.getIdUser(), activity.getIdKategori(), activity.getTanggal(), activity.getCatatan(), activity.getJumlah())
+        service.buatTransaksi( transaksi.getIdUser(), transaksi.getIdKategori(), transaksi.getTanggal(), transaksi.getCatatan(), transaksi.getJumlah())
                 .enqueue(new Callback<BuatTransaksi>() {
                     @Override
                     public void onResponse(Call<BuatTransaksi> call, Response<BuatTransaksi> response) {
                         if (response.isSuccessful()) {
                             isInsert = true;
-                            Toast.makeText(AddActivity.this, "Berhasil insert task", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddActivity.this, "Berhasil insert transaksi Bulan "+ Util.calendarToString(Util.stringToCalendar(transaksi.getTanggal(),"yyyy MM dd"), "MMMM"), Toast.LENGTH_LONG).show();
+                            DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksi(transaksi);
                         } else {
-                            Toast.makeText(AddActivity.this, "laravel ok, DB no", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddActivity.this, "Koneksi DB Gagal", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BuatTransaksi> call, Throwable t) {
-                        Toast.makeText(AddActivity.this, "laravel no", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddActivity.this, "Koneksi Bermasalah", Toast.LENGTH_LONG).show();
                     }
                 });
         Log.d("isInsert", String.valueOf(isInsert));
-        if (isInsert) activity.setStatusSync(1);
-        else activity.setStatusSync(0);
-        activity.setStatusUpdate(1);
-        activity.setStatusDelete(1);
-        DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksi(activity);
+        if (isInsert) transaksi.setStatusSync(1);
+        else transaksi.setStatusSync(0);
+        transaksi.setStatusUpdate(1);
+        transaksi.setStatusDelete(1);
     }
 
     private void updateTrans(){
         isUpdate = false;
-        service.updateTransaksi(activity.getId(), activity.getJumlah(), activity.getIdKategori(), activity.getCatatan()
-                , activity.getTanggal()).
+        Log.e("Transaksi Update", String.valueOf(transaksi.getId()));
+        service.updateTransaksi(transaksi.getId(), transaksi.getJumlah(), transaksi.getIdKategori(), transaksi.getTanggal()
+                , transaksi.getCatatan()).
                 enqueue(new Callback<UpdateTransaksi>() {
                     @Override
                     public void onResponse(Call<UpdateTransaksi> call, Response<UpdateTransaksi> response) {
                         if (response.isSuccessful()) {
                             Log.d("TaskUpdate", response.body().getUpdateTransaksi().toString());
                             isUpdate = true;
-                            Toast.makeText(AddActivity.this,"Berhasil update task",Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddActivity.this,"Berhasil update transaksi",Toast.LENGTH_LONG).show();
+                            DompetkuSqLite.getInstance(getApplicationContext()).editTransaksi(transaksi);
                         }
                         else {
-                            Toast.makeText(AddActivity.this,"laravel ok, DB no",Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddActivity.this,"Koneksi DB Gagal",Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<UpdateTransaksi> call, Throwable t) {
-                        Toast.makeText(AddActivity.this,"laravel no",Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddActivity.this,"Koneksi Bermasalah",Toast.LENGTH_LONG).show();
                     }
                 });
 
     }
 
+    private void deleteTrans(){
+        isUpdate = false;
+        Log.e("Transaksi Delete", String.valueOf(transaksi.getId()));
+        service.deleteTransaksi(transaksi.getId())
+                .enqueue(new Callback<DeleteTransaksi>() {
+                    @Override
+                    public void onResponse(Call<DeleteTransaksi> call, Response<DeleteTransaksi> response) {
+                        if (response.isSuccessful()) {
+                            isUpdate = true;
+                            Toast.makeText(AddActivity.this,"Berhasil delete transaksi",Toast.LENGTH_LONG).show();
+                            DompetkuSqLite.getInstance(getApplicationContext()).deleteTransaksi(transaksi);
+                        }
+                        else {
+                            Toast.makeText(AddActivity.this,"Koneksi DB Bermasalah",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeleteTransaksi> call, Throwable t) {
+                        Toast.makeText(AddActivity.this,"Koneksi Bermasalah",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    }
 
 
     private void setupToolBar() {
@@ -378,7 +406,7 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // close this activity as oppose to navigating up
+        finish(); // close this transaksi as oppose to navigating up
 
         return false;
     }

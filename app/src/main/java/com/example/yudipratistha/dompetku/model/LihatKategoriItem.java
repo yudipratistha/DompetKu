@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 //@Generated("com.robohorse.robopojogenerator")
-public class LihatKategoriItem{
+public class LihatKategoriItem implements Serializable {
 
 
 	public LihatKategoriItem(int id, int idUser, String namaKategori, int icon, String tipe) {
@@ -41,6 +43,10 @@ public class LihatKategoriItem{
 
 	public LihatKategoriItem(int idUser) {
 		this.idUser = idUser;
+	}
+
+	public LihatKategoriItem() {
+
 	}
 
 	public void setUpdatedAt(String updatedAt){

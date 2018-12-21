@@ -6,25 +6,50 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.widget.Toolbar
-        android:theme="?actionBarTheme"
+        android:background="@color/colorPrimary"
         android:id="@id/toolbar"
-        android:background="?colorPrimary"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
-        app:title="Tambah Kategori"
         app:navigationIcon="@drawable/ic_clear_black_24dp"
-        app:titleTextColor="@color/colorPrimary_light" />
-    <TextView
-        android:textSize="@dimen/text_regular"
-        android:id="@+id/kategori_name"
-        android:background="@drawable/item_white_border_bottom"
-        android:padding="@dimen/text_regular_padding"
+        app:title="Edit / Tambah Transaksi"
+        app:titleTextColor="@color/colorPrimary_light" >
+
+        <!--<ImageButton-->
+        <!--android:layout_gravity="end"-->
+        <!--android:id="@+id/toolbar_wallet"-->
+        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+        <!--android:visibility="visible"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/appbar_tab"-->
+        <!--android:src="@drawable/ic_done_black_24dp"-->
+        <!--android:tint="@color/mdtp_white"/>-->
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        style="@style/CustomTheme"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Kategori Pengeluaran"
-        android:ems="10"
-        android:drawablePadding="@dimen/default_gap" />
+        android:layout_height="40dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/primaryTextColor"
+        app:tabIndicatorHeight="3.0dip"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/primaryTextColor"
+        app:tabTextColor="@color/mdtp_line_background">
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengeluaran" />
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pemasukan" />
+    </android.support.design.widget.TabLayout>
     <EditText
         android:textSize="@dimen/text_regular"
         android:id="@+id/category_name"
@@ -38,18 +63,10 @@
         android:drawablePadding="@dimen/default_gap"
         android:inputType="textPersonName"
         android:drawableStart="@drawable/ic_folder_special_black_24dp" />
-    <Button
-        android:textSize="@dimen/text_regular"
-        android:layout_gravity="start"
-        android:id="@+id/button_select_icon"
-        android:background="@drawable/item_white_border_bottom"
-        android:padding="@dimen/text_regular_padding"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pilih icon"
-        android:ems="10"
-        android:drawableLeft="@drawable/black_dropdown"
-        android:drawablePadding="@dimen/default_gap"
-        android:drawableStart="@drawable/black_dropdown"
-        android:textAlignment="textStart" />
+    <Spinner
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="sans-serif-condensed"/>
 </LinearLayout>

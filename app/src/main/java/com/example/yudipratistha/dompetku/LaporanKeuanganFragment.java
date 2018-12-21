@@ -57,8 +57,8 @@ public class LaporanKeuanganFragment extends Fragment {
         text_pendapatan_total = getActivity().findViewById(R.id.text_pendapatan_total);
         text_pengeluaran_total = getActivity().findViewById(R.id.text_pengeluaran_total);
         text_jumlah_total = getActivity().findViewById(R.id.text_jumlah_total);
-        PieChartView chart_pemasukan = getActivity().findViewById(R.id.chart_pemasukan);
-        PieChartView chart_pengeluaran = getActivity().findViewById(R.id.chart_pengeluaran);
+//        PieChartView chart_pemasukan = getActivity().findViewById(R.id.chart_pemasukan);
+//        PieChartView chart_pengeluaran = getActivity().findViewById(R.id.chart_pengeluaran);
 
         myCalendar = Calendar.getInstance();
         myCalendar.add(Calendar.DATE, -7);

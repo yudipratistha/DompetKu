@@ -42,16 +42,16 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/transaksi_list"
+                android:id="@+id/kategori_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="80dp"
                 android:scrollbars="vertical"
-                tools:listitem="@layout/transaksi_item" />
+                tools:listitem="@layout/kategori_item" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_activity"
+        android:id="@+id/fab_add_kategori_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

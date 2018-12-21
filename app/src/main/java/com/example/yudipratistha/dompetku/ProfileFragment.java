@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,27 +17,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.yudipratistha.dompetku.model.DataPengguna;
+import com.example.yudipratistha.dompetku.API.APIClient;
+import com.example.yudipratistha.dompetku.API.APIService;
+import com.example.yudipratistha.dompetku.model.LihatTransaksi;
+import com.example.yudipratistha.dompetku.model.User;
 import com.example.yudipratistha.dompetku.model.UserLogin;
+import com.example.yudipratistha.dompetku.model.UserUpdate;
+import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
 
 import java.util.Calendar;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ProfileFragment extends Fragment {
-    public DataPengguna profile;
-    private Calendar birthdayCalendar = Calendar.getInstance();
-    private ImageView profile_pict;
+    public User profile;
     private EditText name_input;
-    private EditText move_minute_input;
-    private EditText move_distance_input;
-    private EditText gender_input;
-    private EditText birthday_input;
-    private EditText weight_input;
-    private EditText height_input;
+    private EditText input_email;
     private Button logout_button;
     private Button aturkategori;
     private Button aturpengingat;
+    APIService service;
 
     public ProfileFragment() {}
 
@@ -59,33 +64,13 @@ public class ProfileFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setCustomView(R.layout.app_bar_text);
         TextView text_judul = getActivity().findViewById(R.id.text_judul);
         text_judul.setText(R.string.profil);
+        service = APIClient.getService();
 
-//        profile = TriathlogDbHelper.getInstance(getActivity()).getProfile(1);
-        profile = new DataPengguna();
-        profile.setId(1);
-        profile.setCreatedAt("2018-06-30");
-        profile.setUpdatedAt("2018-06-31");
-        profile.setName("Yudi");
-        profile.setEmail("yudipratistha@gmail.com");
-
+        profile = DompetkuSqLite.getInstance(getActivity()).getProfile();
         name_input = getActivity().findViewById(R.id.name_input);
-        move_minute_input = getActivity().findViewById(R.id.move_minute_input);
-//        move_distance_input = getActivity().findViewById(R.id.move_distance_input);
-        gender_input = getActivity().findViewById(R.id.gender_input);
-        birthday_input = getActivity().findViewById(R.id.birthday_input);
-//        weight_input = getActivity().findViewById(R.id.weight_input);
-//        height_input = getActivity().findViewById(R.id.height_input);
-        profile_pict = getActivity().findViewById(R.id.profile_pict);
+        input_email = getActivity().findViewById(R.id.input_email);
 
-        //Glide.with(this).load(R.drawable.profile).into(profile_pict);
-
-//        name_input.setOnFocusChangeListener(new FocusChangeListener());
-//        move_minute_input.setOnFocusChangeListener(new FocusChangeListener());
-//        move_distance_input.setOnFocusChangeListener(new FocusChangeListener());
-//        gender_input.setOnFocusChangeListener(new FocusChangeListener());
-//        birthday_input.setOnFocusChangeListener(new FocusChangeListener());
-//        weight_input.setOnFocusChangeListener(new FocusChangeListener());
-//        height_input.setOnFocusChangeListener(new FocusChangeListener());
+        name_input.setOnFocusChangeListener(new FocusChangeListener());
 
         populateData(profile);
 
@@ -94,78 +79,92 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SharedPreferences preferences = getActivity().getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.commit();
-                Intent loginactivity = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
-                startActivity(loginactivity);
-                getActivity().finish();
+                int id_user = preferences.getInt("id",0);
+                service.lihatTransaksi(id_user)
+                        .enqueue(new Callback<LihatTransaksi>() {
+                            @Override
+                            public void onResponse(Call<LihatTransaksi> call, Response<LihatTransaksi> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Logout Success", Toast.LENGTH_LONG).show();
+                                    SharedPreferences preferences = getActivity().getSharedPreferences("dataPengguna", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.clear();
+                                    editor.commit();
+                                    Intent loginactivity = new Intent(getActivity().getApplicationContext(),LoginActivity.class);
+                                    startActivity(loginactivity);
+                                    getActivity().finish();
+                                } else {
+                                    Toast.makeText(getActivity(), "Can't Connect to Server", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<LihatTransaksi> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Can't Connect to Server" + t, Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
 
-        aturkategori = getActivity().findViewById(R.id.btn_aturkategori);
-        aturkategori.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), KategoriActivity.class);
-                startActivity(intent);
-            }
-        });
-        aturpengingat = getActivity().findViewById(R.id.btn_aturpengingat);
-        aturpengingat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PengingatActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void populateData(DataPengguna profile){
-        if(profile.getId()!=0) {
-            name_input.setText(String.valueOf(profile.getId()));
-        }
-//        if(profile.getName()!=null) {
-//            move_minute_input.setText(profile.getName());
-//        }
-//        if(profile.getEmail()!=null) {
-//            move_distance_input.setText(profile.getEmail());
-//        }
-//        if(profile.getCreatedAt()!=null) {
-//            gender_input.setText(profile.getCreatedAt());
-//        }
-    }
-
-//    class FocusChangeListener implements View.OnFocusChangeListener{
-//        @Override
-//        public void onFocusChange(View view, boolean b) {
-//            if(!b) {
-//                boolean changed = false;
-//                if(!name_input.getText().toString().equals("")) {
-//                    if (Integer.parseInt(name_input.getText().toString()) != profile.getId()) {
-//                        profile.setId(Integer.parseInt(name_input.getText().toString()));
-//                        changed = true;
-//                    }
-//                }
-//                if(!move_minute_input.getText().toString().equals(profile.getName())) {
-//                    profile.setName(move_minute_input.getText().toString());
-//                    changed=true;
-//                }
-//                if(!move_distance_input.getText().toString().equals(profile.getEmail())) {
-//                    profile.setEmail(move_distance_input.getText().toString());
-//                    changed=true;
-//                }
-//
-//                if(!gender_input.getText().toString().equals(profile.getCreatedAt())) {
-//                    profile.setCreatedAt(gender_input.getText().toString());
-//                    changed=true;
-//                }
-//
-//                if(changed) {
-//                    //TriathlogDbHelper.getInstance(getActivity()).editProfile(profile);
-//                }
+//        aturkategori = getActivity().findViewById(R.id.btn_aturkategori);
+//        aturkategori.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), KategoriActivity.class);
+//                startActivity(intent);
 //            }
-//        }
-//    }
+//        });
+//        aturpengingat = getActivity().findViewById(R.id.btn_aturpengingat);
+//        aturpengingat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), PengingatActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+
+    private void populateData(User profile){
+        if(profile.getName()!=null) {
+            name_input.setText(profile.getName());
+        }
+        if(profile.getEmail()!=null) {
+            input_email.setText(profile.getEmail());
+        }
+    }
+
+    class FocusChangeListener implements View.OnFocusChangeListener{
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            if(!b) {
+                boolean changed = false;
+                if(!name_input.getText().toString().equals(profile.getName())) {
+                    profile.setName(name_input.getText().toString());
+                    changed=true;
+                }
+                if(changed) {
+                    Log.e("Update", String.valueOf(profile));
+                    service.updateUser(profile.getId(), profile.getName())
+                            .enqueue(new Callback<UserUpdate>() {
+                                @Override
+                                public void onResponse(Call<UserUpdate> call, Response<UserUpdate> response) {
+                                    if (response.isSuccessful()) {
+//                                        Toast.makeText(getContext(), "Sukses update profil", Toast.LENGTH_LONG).show();
+
+                                    } else {
+//                                        Toast.makeText(getContext(), "Gagal update profil", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<UserUpdate> call, Throwable t) {
+                                    Toast.makeText(getContext(), "Koneksi gagal", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    DompetkuSqLite.getInstance(getContext()).editProfile(profile);
+                }
+            }
+        }
+    }
 
 }

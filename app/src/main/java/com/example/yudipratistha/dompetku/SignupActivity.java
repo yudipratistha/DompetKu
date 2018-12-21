@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
+import com.example.yudipratistha.dompetku.model.BuatTransaksi;
 import com.example.yudipratistha.dompetku.model.Signup;
 import com.example.yudipratistha.dompetku.sqllite.DompetkuSqLite;
 
@@ -59,15 +60,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                     DompetkuSqLite.getInstance(getApplicationContext()).insertKategoris(response.body().getId());
                                     Toast.makeText(SignupActivity.this,"Sukses",Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                    finish();
                                 }
                                 else {
-                                    Toast.makeText(SignupActivity.this,"Gagal nyet",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignupActivity.this,"Terjadi Kesalahan Input",Toast.LENGTH_LONG).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<Signup> call, Throwable t) {
-                                Toast.makeText(SignupActivity.this,"Gagal"+t,Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignupActivity.this,"Koneksi Gagal",Toast.LENGTH_LONG).show();
                             }
                         });
                 break;

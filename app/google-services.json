@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "224202159953",
+    "firebase_url": "https://dompetku-ad94a.firebaseio.com",
+    "project_id": "dompetku-ad94a",
+    "storage_bucket": "dompetku-ad94a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224202159953:android:ae5dc56588920eb1",
+        "android_client_info": {
+          "package_name": "com.example.yudipratistha.dompetku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224202159953-f4m8m9fejedfq2eelfl8oujpdp3rrthr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yudipratistha.dompetku",
+            "certificate_hash": "eab2f9b139062f6ef0ace58d36b29c07219d3a96"
+          }
+        },
+        {
+          "client_id": "224202159953-cl7l4jsru5fgi8kfnhv8furgvm4cn6ud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHIEphtKe336KcDt0_gJPWLKWE6ZZEbIw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224202159953-cl7l4jsru5fgi8kfnhv8furgvm4cn6ud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

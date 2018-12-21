@@ -122,14 +122,14 @@
                     android:inputType="textPersonName"
                     android:imeOptions="actionDone"
                     android:drawableStart="@drawable/ic_cat_event_note_black_24dp" />
-                <ImageButton
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/imageButton"
-                    android:background="@drawable/item_white_border_bottom"
-                    android:padding="@dimen/text_regular_padding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_photo_camera_black_24dp" />
+                <!--<ImageButton-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:id="@+id/imageButton"-->
+                    <!--android:background="@drawable/item_white_border_bottom"-->
+                    <!--android:padding="@dimen/text_regular_padding"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/ic_photo_camera_black_24dp" />-->
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:gravity="start"

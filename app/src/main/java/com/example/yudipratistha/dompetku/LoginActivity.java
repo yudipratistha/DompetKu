@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.yudipratistha.dompetku.API.APIClient;
 import com.example.yudipratistha.dompetku.API.APIService;
+import com.example.yudipratistha.dompetku.model.LihatKategori;
 import com.example.yudipratistha.dompetku.model.LihatTransaksi;
 import com.example.yudipratistha.dompetku.model.User;
 import com.example.yudipratistha.dompetku.model.UserLogin;
@@ -93,8 +95,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     profile.setUpdatedAt(updated_at_user);
                                     profile.setName(name_user);
                                     profile.setEmail(email_user);
-
+//
                                     insertLogin();
+                                    insertKategori();
+
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Gagal ada masalah pengisian", Toast.LENGTH_LONG).show();
                                 }
@@ -102,13 +106,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             @Override
                             public void onFailure(Call<UserLogin> call, Throwable t) {
-                                Toast.makeText(LoginActivity.this, "Gagal" + t, Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Koneksi Gagal", Toast.LENGTH_LONG).show();
                             }
                         });
                 break;
             case R.id.link_signup:
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-                finish();
                 break;
         }
 
@@ -118,14 +121,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void insertLogin(){
         DompetkuSqLite.getInstance(getApplicationContext()).emptyProfiles();
         DompetkuSqLite.getInstance(getApplicationContext()).emptyTransaksi();
+        DompetkuSqLite.getInstance(getApplicationContext()).emptyKategori();
         DompetkuSqLite.getInstance(getApplicationContext()).insertProfileId(profile);
         service.lihatTransaksi(id_user)
                 .enqueue(new Callback<LihatTransaksi>() {
                     @Override
                     public void onResponse(Call<LihatTransaksi> call, Response<LihatTransaksi> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Sukses", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Sukses insert", Toast.LENGTH_LONG).show();
                             DompetkuSqLite.getInstance(getApplicationContext()).insertTransaksiLogin(response.body().getLihatTransaksi());
+
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Gagal insert data", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LihatTransaksi> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Koneksi gagal", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void insertKategori(){
+        service.lihatKategori()
+                .enqueue(new Callback<LihatKategori>() {
+                    @Override
+                    public void onResponse(Call<LihatKategori> call, Response<LihatKategori> response) {
+                        if (response.isSuccessful()) {
+//                            Log.d("kat", String.valueOf(response.body().getLihatKategori()));
+                            Toast.makeText(LoginActivity.this, "Sukses kategori", Toast.LENGTH_LONG).show();
+                            DompetkuSqLite.getInstance(getApplicationContext()).insertKategoriLogin(response.body().getLihatKategori());
                             Intent tampilanUtama = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(tampilanUtama);
                             finish();
@@ -137,10 +164,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
 
                     @Override
-                    public void onFailure(Call<LihatTransaksi> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Koneksi gagal" + t, Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<LihatKategori> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Koneksi gagal", Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 }

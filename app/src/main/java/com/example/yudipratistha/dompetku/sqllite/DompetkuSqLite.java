@@ -418,7 +418,8 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
 
     public void insertKategoris(int idUser){
         SQLiteDatabase db = this.getWritableDatabase();
-        List<String> type_names = Arrays.asList("Belanja","Makanan & Minuman","Gaji");
+        List<String> type_names = Arrays.asList("Belanja","Makanan & Minuman", "Tagihan", "Transportasi", "Hadiah & Donasi", "Pendidikan", "Kesehatan", "Lain-lain",
+                "Gaji", "Hadiah", "Penjualan", "Lain-lain");
         List<Integer> type_icons = Arrays.asList(R.drawable.ic_cat_local_grocery_store_black_24dp, R.drawable.ic_cat_local_dining_black_24dp, R.drawable.ic_cat_event_available_black_24dp,
                 R.drawable.ic_cat_directions_bus_black_24dp, R.drawable.ic_cat_card_giftcard_black_24dp, R.drawable.ic_cat_school_black_24dp, R.drawable.ic_cat_local_hospital_black_24dp, R.drawable.ic_cat_local_florist_black_24dp,
                 R.drawable.ic_cat_work_black_24dp, R.drawable.ic_cat_card_giftcard_black_24dp, R.drawable.ic_cat_thumb_up_black_24dp, R.drawable.ic_cat_local_florist_black_24dp);
@@ -435,12 +436,19 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
         }
     }
 
+    public void insertKategoriLogin(List<LihatKategoriItem> kategoris) {
+        emptyKategori();
+        for (LihatKategoriItem kategori: kategoris) {
+            insertKategoriUser(kategori);
+        }
+    }
+
     //insertKategoriUser
     //Insert Kategori User Online
     public long insertKategoriUser(LihatKategoriItem kategori) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KategoriContract.COLUMN_ID_USER, kategori.getIdUser());
+        values.put(KategoriContract._ID, kategori.getId());
         values.put(KategoriContract.COLUMN_NAMA_KATEGORI, kategori.getNamaKategori());
         values.put(KategoriContract.COLUMN_ICON, kategori.getIcon());
         values.put(KategoriContract.COLUMN_TIPE, kategori.getTipe());
@@ -448,9 +456,36 @@ public class DompetkuSqLite extends SQLiteOpenHelper {
         values.put(KategoriContract.COLUMN_CREATED_AT, kategori.getCreatedAt());
         values.put(KategoriContract.COLUMN_UPDATED_AT, kategori.getUpdatedAt());
 
-        long id = db.insert(TransaksiContract.TABLE_NAME, null, values);
+        long id = db.insert(KategoriContract.TABLE_NAME, null, values);
         db.close();
         return id;
+    }
+
+    public List<LihatKategoriItem> getKategori(String tipe){
+        List<LihatKategoriItem> kategoris = new ArrayList<>();
+        String qry = "select * from kategoris where tipe ='"+ tipe +"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(qry, null);
+        if (cursor.moveToFirst()) {
+            do {
+                LihatKategoriItem kategori = new LihatKategoriItem();
+                kategori.setId(cursor.getInt(cursor.getColumnIndex(KategoriContract._ID)));
+                kategori.setIdUser(cursor.getInt(cursor.getColumnIndex(KategoriContract.COLUMN_ID_USER)));
+                kategori.setNamaKategori(cursor.getString(cursor.getColumnIndex(KategoriContract.COLUMN_NAMA_KATEGORI)));
+                kategori.setIcon(cursor.getInt(cursor.getColumnIndex(KategoriContract.COLUMN_ICON)));
+                kategori.setTipe(cursor.getString(cursor.getColumnIndex(KategoriContract.COLUMN_TIPE)));
+                kategoris.add(kategori);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return kategoris;
+    }
+
+    public void emptyKategori(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String qry = "DELETE FROM " + KategoriContract.TABLE_NAME;
+        db.execSQL(qry);
+        db.close();
     }
 
     //Insert Kategori User Offline

@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <include
                 layout="@layout/filter_date_range"
                 android:layout_width="match_parent"

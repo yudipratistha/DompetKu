@@ -91,30 +91,30 @@
                     android:layout_height="0dp"
                     android:text="Rp.2.004.004"
                     android:layout_weight="1"/>
-                <TextView
-                    android:fontFamily="sans-serif-condensed"
-                    android:textSize="@dimen/text_regular_form"
-                    android:textStyle="bold"
-                    android:id="@+id/textView71"
-                    android:background="@color/colorPrimary_light"
-                    android:padding="@dimen/default_gap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Chart Kategori:"/>
-                <lecho.lib.hellocharts.view.PieChartView
-                    android:id="@+id/chart_pemasukan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_gap_form"
-                    android:layout_marginBottom="@dimen/default_gap_form"
-                    android:minHeight="180dp"/>
-                <lecho.lib.hellocharts.view.PieChartView
-                    android:id="@+id/chart_pengeluaran"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/default_gap_form"
-                    android:layout_marginBottom="@dimen/default_gap_form"
-                    android:minHeight="180dp"/>
+                <!--<TextView-->
+                    <!--android:fontFamily="sans-serif-condensed"-->
+                    <!--android:textSize="@dimen/text_regular_form"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:id="@+id/textView71"-->
+                    <!--android:background="@color/colorPrimary_light"-->
+                    <!--android:padding="@dimen/default_gap"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Chart Kategori:"/>-->
+                <!--<lecho.lib.hellocharts.view.PieChartView-->
+                    <!--android:id="@+id/chart_pemasukan"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="@dimen/default_gap_form"-->
+                    <!--android:layout_marginBottom="@dimen/default_gap_form"-->
+                    <!--android:minHeight="180dp"/>-->
+                <!--<lecho.lib.hellocharts.view.PieChartView-->
+                    <!--android:id="@+id/chart_pengeluaran"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="@dimen/default_gap_form"-->
+                    <!--android:layout_marginBottom="@dimen/default_gap_form"-->
+                    <!--android:minHeight="180dp"/>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

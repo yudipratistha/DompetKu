@@ -54,12 +54,12 @@
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/move_minute_input"
+                        android:id="@+id/input_email"
                         android:layout_width="335dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"
                         android:hint="Email"
-                        android:inputType="number" />
+                        android:enabled="false" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -106,6 +106,8 @@
                 </android.support.design.widget.TextInputLayout>
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_logout"
+                    android:background="@color/colorAccentRed"
+                    android:textColor="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-20dp"
@@ -117,171 +119,85 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
 
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="30dp"
-                android:textColor="#222"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="16sp"
-                android:text="Atur Kategori"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="0dp"
-                android:textColor="#222"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Atur kategori untuk melihat dan edit kategori yang tersedia."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="#EEE"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
-            <LinearLayout
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_aturkategori"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-20dp"
-                    android:src="@drawable/ic_person_black_24dp"
-                    android:text="Atur Kategori" />
-            </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginBottom="1dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:textColor="#222"-->
+                <!--android:fontFamily="sans-serif-condensed"-->
+                <!--android:textSize="16sp"-->
+                <!--android:text="Atur Kategori"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:textColor="#222"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textStyle="italic"-->
+                <!--android:fontFamily="sans-serif-condensed"-->
+                <!--android:text="Atur kategori untuk melihat dan edit kategori yang tersedia."-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<View-->
+                <!--android:background="#EEE"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"/>-->
+            <!--<LinearLayout-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginEnd="24dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<android.support.v7.widget.AppCompatButton-->
+                    <!--android:id="@+id/btn_aturkategori"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="-20dp"-->
+                    <!--android:src="@drawable/ic_person_black_24dp"-->
+                    <!--android:text="Atur Kategori" />-->
+            <!--</LinearLayout>-->
 
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="30dp"
-                android:textColor="#222"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="16sp"
-                android:text="Atur Pengingat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="0dp"
-                android:textColor="#222"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Atur pengingat untuk mengatur notifikasi."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="#EEE"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
-            <LinearLayout
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_aturpengingat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-20dp"
-                    android:src="@drawable/ic_person_black_24dp"
-                    android:text="Atur Pengingat" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="30dp"
-                android:textColor="#222"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="16sp"
-                android:text="Ganti Password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="0dp"
-                android:textColor="#222"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Tinggalkan kolom ganti password kosong, bila tidak menggantinya."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="#EEE"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
-
-            <LinearLayout
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginEnd="8dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/changepassword"
-                        android:inputType="numberDecimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="Password" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginEnd="8dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/c_changepassword"
-                        android:inputType="numberDecimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="Confirm Password" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_changepassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-20dp"
-                    android:src="@drawable/ic_person_black_24dp"
-                    android:text="Change Password" />
-            </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginBottom="1dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:textColor="#222"-->
+                <!--android:fontFamily="sans-serif-condensed"-->
+                <!--android:textSize="16sp"-->
+                <!--android:text="Atur Pengingat"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:textColor="#222"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textStyle="italic"-->
+                <!--android:fontFamily="sans-serif-condensed"-->
+                <!--android:text="Atur pengingat untuk mengatur notifikasi."-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<View-->
+                <!--android:background="#EEE"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"/>-->
+            <!--<LinearLayout-->
+                <!--android:layout_marginStart="24dp"-->
+                <!--android:layout_marginEnd="24dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<android.support.v7.widget.AppCompatButton-->
+                    <!--android:id="@+id/btn_aturpengingat"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="-20dp"-->
+                    <!--android:src="@drawable/ic_person_black_24dp"-->
+                    <!--android:text="Atur Pengingat" />-->
+            <!--</LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
